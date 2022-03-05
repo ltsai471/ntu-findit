@@ -1,32 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import { useLocation } from 'react-router-dom'
 import "../styles.css";
 
-let rows = [
-  {
-    "id": "001",
-    "customer": "Steve"
-  },
-  {
-    "id": "017",
-    "customer": "Steve"
-  },
-  {
-    "id": "021",
-    "customer": "Steve"
-  },
-  {
-    "id": "101",
-    "customer": "Steve"
-  }
-];
-
 function OrderDetail() {
-  let { orderDetail } = useParams();
+  const location = useLocation()
+  const { id, customer } = location.state
 
-  useEffect(() => {
-    // Fetch post using the postSlug
-  }, [orderDetail]);
+  // let { orderDetail } = useParams();
+  // // let {state} = useState(0);
+  // // const [id, customer] = useState();
+
+  // useEffect(() => {
+  //   // Fetch post using the postSlug
+  // }, [orderDetail]);
 
   return (
     <div className="home">
@@ -37,11 +24,11 @@ function OrderDetail() {
           </tr>
           <tr>
             <td>ID</td>
-            <td>{orderDetail}</td>
+            <td>{id}</td>
           </tr>
           <tr>
             <td>Customer</td>
-            <td>Francisco Chang</td>
+            <td>{customer}</td>
           </tr>
           <tr>
             <td>Items</td>

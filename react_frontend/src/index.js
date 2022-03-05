@@ -6,9 +6,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import {
   Navigation,
   Footer,
-  Blog,
-  Posts,
-  Post,
   OrderList,
   OrderDetail,
 } from "./components";

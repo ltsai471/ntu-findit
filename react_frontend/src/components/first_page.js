@@ -18,10 +18,14 @@ const OrderID = ({
       className="rgt-cell-inner"
       style={{ display: "flex", alignItems: "center", overflow: "hidden" }}
     >
-      <Link to={value}>
-      <span className="rgt-text-truncate" style={{ marginLeft: 10 }}>
-        {value}
-      </span>
+      <Link to={ value} state={ {
+          "id": "001",
+          "customer": "Steve"
+        }}
+      >
+        <span className="rgt-text-truncate" style={{ marginLeft: 10 }}>
+          {value}
+        </span>
       </Link>
     </div>
   );
