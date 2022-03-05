@@ -1,6 +1,7 @@
-import "./styles.css";
+import "../styles.css";
 import React from "react";
 import GridTable from "@nadavshaar/react-grid-table";
+import { Link } from "react-router-dom";
 
 // custom cell component
 const OrderID = ({
@@ -17,11 +18,11 @@ const OrderID = ({
       className="rgt-cell-inner"
       style={{ display: "flex", alignItems: "center", overflow: "hidden" }}
     >
-      <a href="">
+      <Link to={value}>
       <span className="rgt-text-truncate" style={{ marginLeft: 10 }}>
         {value}
       </span>
-      </a>
+      </Link>
     </div>
   );
 };
@@ -59,8 +60,8 @@ const columns = [
   },
 ];
 
-const App = () => (
+const OrderList = () => (
   <GridTable columns={columns} rows={rows} isPaginated={false} />
 );
 
-export default App;
+export default OrderList;

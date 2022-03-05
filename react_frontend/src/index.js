@@ -9,16 +9,20 @@ import {
   Blog,
   Posts,
   Post,
+  OrderList,
+  OrderDetail,
 } from "./components";
 
 ReactDOM.render(
   <Router>
     <Navigation />
     <Routes>
-      <Route path="/" element={<Blog />}>
+      {/* <Route path="/Blog" element={<Blog />}>
         <Route path="" element={<Posts />} />
         <Route path=":postSlug" element={<Post />} />
-      </Route>
+      </Route> */}
+      <Route path="/" element={<OrderList />}></Route>
+      <Route path="/:orderDetail" element={<OrderDetail />} />
     </Routes>
     <Footer />
   </Router>,
