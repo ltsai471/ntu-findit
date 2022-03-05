@@ -1,7 +1,32 @@
-import React, { Component } from "react";
-import './styles.css';
+import "./styles.css";
+import React from "react";
+import GridTable from "@nadavshaar/react-grid-table";
 
-const orderItems = [
+// custom cell component
+const OrderID = ({
+  tableManager,
+  value,
+  field,
+  data,
+  column,
+  colIndex,
+  rowIndex
+}) => {
+  return (
+    <div
+      className="rgt-cell-inner"
+      style={{ display: "flex", alignItems: "center", overflow: "hidden" }}
+    >
+      <a href="">
+      <span className="rgt-text-truncate" style={{ marginLeft: 10 }}>
+        {value}
+      </span>
+      </a>
+    </div>
+  );
+};
+
+let rows = [
   {
     "id": "001",
     "customer": "Steve"
@@ -20,34 +45,22 @@ const orderItems = [
   }
 ];
 
-// class App extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       viewCompleted: false,
-//       todoList: todoItems,
-//     };
-//   }
+const columns = [
+  {
+    id: 1,
+    field: "id",
+    label: "ID",
+    cellRenderer: OrderID
+  },
+  {
+    id: 2,
+    field: "customer",
+    label: "Customer"
+  },
+];
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <div>
-          <input></input>
-          <button>search</button>
-        </div>
-        <div class="grid-container">
-          <div class="grid-header">Orders</div>
-          <div class="grid-col-header1">ID</div>
-          <div class="grid-col-header2">Customer</div>
-          <div class="grid-item">1</div>
-          <div class="grid-item">2</div>
-          <div class="grid-footer">Footer</div>
-        </div>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <GridTable columns={columns} rows={rows} isPaginated={false} />
+);
 
 export default App;
