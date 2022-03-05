@@ -6,9 +6,29 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import {
   Navigation,
   Footer,
-  OrderList,
+  OrderListContainer,
   OrderDetail,
 } from "./components";
+
+const orders = [
+  {
+    "id": "001",
+    "customer": "Steve"
+  },
+  {
+    "id": "017",
+    "customer": "Steve"
+  },
+  {
+    "id": "021",
+    "customer": "Steve"
+  },
+  {
+    "id": "045",
+    "customer": "Laura"
+  }
+];
+
 
 ReactDOM.render(
   <Router>
@@ -18,7 +38,9 @@ ReactDOM.render(
         <Route path="" element={<Posts />} />
         <Route path=":postSlug" element={<Post />} />
       </Route> */}
-      <Route path="/" element={<OrderList />}></Route>
+      {/* <Route path="/" element={<OrderList />}></Route>
+      <Route path="/:orderDetail" element={<OrderDetail />} /> */}
+      <Route path="/" element={<OrderListContainer orders={orders} />} />
       <Route path="/:orderDetail" element={<OrderDetail />} />
     </Routes>
     <Footer />
