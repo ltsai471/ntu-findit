@@ -24,28 +24,27 @@ import axios from "axios";
 // ];
 
 function OrderListContainer() {
+  const [loading, setLoading] = useState(true);
+  // const [data, setData] = useState([])
 
   const [orders, setOrders] = useState([]);
+  const [query, setQuery] = useState('redux');
 
   useEffect(() => {
-    axios
-      .get("/api/orders/")
-      .then((res) => this.setOrders({ orders: res.data }))
-      .catch((err) => console.log(err));
-  });
-  
-  
-  // {
-  //   getOrders().then(data => {
-  //     setOrders(data.orders)
-  //   });
-  // }, []);
+    const fetchData = async () => {
+      const result = await axios('/api/orders/');
+      setOrders(result.data);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="home">
       <div class="container">
         <SearchBar />
         <OrderList orders={orders} />
+        {orders.map(item => (<span>{item.id}  </span>))}
       </div>
     </div>
   );

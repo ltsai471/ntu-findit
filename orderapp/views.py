@@ -7,4 +7,4 @@ from .models import Order
 
 class OrderView(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
-    queryset = Order.objects.all()
+    queryset = Order.objects.filter(customer__icontains='st')

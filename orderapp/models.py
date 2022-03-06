@@ -13,8 +13,8 @@ class Order(models.Model):
         return reverse('order-detail', args=[str(self.id)])
 
 class OrderItem(models.Model):
-    order_id = models.ForeignKey('Order', on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey('Order', related_name='items', on_delete=models.SET_NULL, null=True)
     item_name = models.CharField(max_length=20)
 
     def __str__(self):
-        return f'{self.order_id} ({self.item_name})'
+        return f'{self.order} ({self.item_name})'
