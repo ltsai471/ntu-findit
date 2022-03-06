@@ -10,37 +10,12 @@ import {
   OrderDetail,
 } from "./components";
 
-const orders = [
-  {
-    "id": "001",
-    "customer": "Steve"
-  },
-  {
-    "id": "017",
-    "customer": "Steve"
-  },
-  {
-    "id": "021",
-    "customer": "Steve"
-  },
-  {
-    "id": "045",
-    "customer": "Laura"
-  }
-];
-
 
 ReactDOM.render(
   <Router>
     <Navigation />
     <Routes>
-      {/* <Route path="/Blog" element={<Blog />}>
-        <Route path="" element={<Posts />} />
-        <Route path=":postSlug" element={<Post />} />
-      </Route> */}
-      {/* <Route path="/" element={<OrderList />}></Route>
-      <Route path="/:orderDetail" element={<OrderDetail />} /> */}
-      <Route path="/" element={<OrderListContainer orders={orders} />} />
+      <Route path="/" element={<OrderListContainer />} />
       <Route path="/:orderDetail" element={<OrderDetail />} />
     </Routes>
     <Footer />

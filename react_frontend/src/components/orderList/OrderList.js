@@ -3,14 +3,24 @@ import OrderRow from "./OrderRow";
 
 function OrderList(props) {
     const rows = [];
-    
-    props.orders.forEach((order) => {
-      rows.push(
-        <OrderRow
-          order={order}
-          key={order.id} />
-      );
-    });
+    if (props.orders.length > 0) {
+        props.orders.forEach((order) => {
+            rows.push(
+                <OrderRow
+                    order={order}
+                    key={order.id} />
+            );
+        });
+    }
+    else {
+        rows.push(
+            <tr>
+                <td colspan="2" style={{color: 'gray'}}>No Orders</td>
+            </tr>
+        );
+
+    }
+
 
     return (
         <div className="home">

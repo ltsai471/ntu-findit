@@ -1,19 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
+// import React, { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom'
-import "../styles.css";
+import "../../styles.css";
 
 function OrderDetail() {
   const location = useLocation()
   const { id, customer } = location.state
-
-  // let { orderDetail } = useParams();
-  // // let {state} = useState(0);
-  // // const [id, customer] = useState();
-
-  // useEffect(() => {
-  //   // Fetch post using the postSlug
-  // }, [orderDetail]);
 
   return (
     <div className="home">

@@ -1,37 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
 import SearchBar from "./SearchBar";
 import OrderList from "./OrderList";
+import axios from "axios";
 
-// ReactDOM.render(
-//   <Router>
-//     <Navigation />
-//     <Routes>
-//       {/* <Route path="/Blog" element={<Blog />}>
-//         <Route path="" element={<Posts />} />
-//         <Route path=":postSlug" element={<Post />} />
-//       </Route> */}
-//       <Route path="/" element={<OrderList />}></Route>
-//       <Route path="/:orderDetail" element={<OrderDetail />} />
-//     </Routes>
-//     <Footer />
-//   </Router>,
+// const orders = [
+//   {
+//     "id": "001",
+//     "customer": "Steve"
+//   },
+//   {
+//     "id": "017",
+//     "customer": "Steve"
+//   },
+//   {
+//     "id": "021",
+//     "customer": "Steve"
+//   },
+//   {
+//     "id": "045",
+//     "customer": "Laura"
+//   }
+// ];
 
-//   document.getElementById("root")
-// );
+function OrderListContainer() {
 
-// serviceWorker.unregister();
+  const [orders, setOrders] = useState([]);
 
+  useEffect(() => {
+    axios
+      .get("/api/orders/")
+      .then((res) => this.setOrders({ orders: res.data }))
+      .catch((err) => console.log(err));
+  });
+  
+  
+  // {
+  //   getOrders().then(data => {
+  //     setOrders(data.orders)
+  //   });
+  // }, []);
 
-// import React from "react";
-// import { Outlet } from "react-router-dom";
-
-function OrderListContainer(props) {
   return (
     <div className="home">
       <div class="container">
         <SearchBar />
-        <OrderList orders={props.orders} />
+        <OrderList orders={orders} />
       </div>
     </div>
   );
