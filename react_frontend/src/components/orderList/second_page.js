@@ -1,10 +1,23 @@
-// import React, { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom'
 import "../../styles.css";
 
-function OrderDetail() {
+function OrderDetail(props) {
   const location = useLocation()
-  const { id, customer } = location.state
+  const { id, customer, items } = location.state
+
+  const rows = [];
+  if (items.length > 0) {
+    items.forEach((item) => {
+      rows.push(
+        <span>{item.item_name}<br /></span>
+      );
+    });
+  }
+  else {
+    rows.push(
+      <span>(None)<br /></span>
+    );
+  }
 
   return (
     <div className="home">
@@ -23,7 +36,7 @@ function OrderDetail() {
           </tr>
           <tr>
             <td>Items</td>
-            <td>Roland Mendel</td>
+            <td>{rows}</td>
           </tr>
         </table>
       </div>

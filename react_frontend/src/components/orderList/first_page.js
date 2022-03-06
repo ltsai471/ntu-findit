@@ -1,50 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from "react-dom";
-import SearchBar from "./SearchBar";
+// import ReactDOM from "react-dom";
+// import SearchBar from "./SearchBar";
 import OrderList from "./OrderList";
 import axios from "axios";
 
-// const orders = [
-//   {
-//     "id": "001",
-//     "customer": "Steve"
-//   },
-//   {
-//     "id": "017",
-//     "customer": "Steve"
-//   },
-//   {
-//     "id": "021",
-//     "customer": "Steve"
-//   },
-//   {
-//     "id": "045",
-//     "customer": "Laura"
-//   }
-// ];
-
 function OrderListContainer() {
   const [loading, setLoading] = useState(true);
-  // const [data, setData] = useState([])
-
   const [orders, setOrders] = useState([]);
-  const [query, setQuery] = useState('redux');
+  const [query, setQuery] = useState();
+  const [url, setUrl] = useState('/api/orders/?query=none',);
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios('/api/orders/');
+      const result = await axios(url);
       setOrders(result.data);
     };
 
     fetchData();
-  }, []);
+  }, [url]);
 
   return (
     <div className="home">
       <div class="container">
-        <SearchBar />
+        {/* <SearchBar /> */}
+        {/* <SearchBar
+          queryText={query}
+          onQueryTextChange={event => setQuery(event.target.value)}
+        /> */}
+        <input
+          type="text"
+          value={query}
+          onChange={event => setQuery(event.target.value)}
+        />
+        <button
+          type="button"
+          onClick={() =>
+            setUrl(`/api/orders/?query=${query}`)
+          }
+        >
+          search
+        </button>
+
         <OrderList orders={orders} />
-        {orders.map(item => (<span>{item.id}  </span>))}
+        {/* {orders.map(item => (<span>{item.items}</span>))} */}
       </div>
     </div>
   );
