@@ -13,8 +13,6 @@ git commit -am "commit_name"
 <code><pre>
 git checkout master
 git pull    //solve conflict if needed
-</code></pre>
-<code><pre>
 git checkout "your_branch_name"
 git merge master
 </code></pre>
