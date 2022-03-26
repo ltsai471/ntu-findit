@@ -2,13 +2,13 @@
 
 ## Framework
 - Frontend: React (dir: react_frontend)
-- Backend: Django (dir: `hw_project` for backend router, `orderapp` for data model)
+- Backend: Django (dir: `hw_project` for backend router, `ntulost` for data model)
 - Database: PostgreSQL 
 
 ## Backend Key File
-- `orderapp/models.py` Data model design
-- `orderapp/serializers.py` convert data model to JSON
-- `orderapp/view.py` display JSON api: http://localhost:8000/api/orders/
+- `ntulost/models.py` Data model design
+- `ntulost/serializers.py` convert data model to JSON
+- `ntulost/view.py` display JSON api: http://localhost:8000/api/orders/
 
 ## Frontend Key File
 - `react_frontend/src/index.js` root page
@@ -17,6 +17,7 @@
         - OrderList
             - OrderRow
     - second_page (OrderDetail)
+
 
 ## Referance
 - [django-and-react tutorial](https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react)

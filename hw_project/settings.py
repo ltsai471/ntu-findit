@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'orderapp.apps.OrderappConfig',
+    'ntulost.apps.NtuLostConfig',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'hw_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'order_application',
+        'NAME': 'ntu_lost',
         'USER': 'root',
         'PASSWORD': 'secure1234',
         'HOST': '127.0.0.1',
