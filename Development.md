@@ -28,8 +28,8 @@ git push
 
 ## Coding Style
 - Use Camel-Case to name all variables
-  - class: Account #use upper-case on the first letter
-  - attr and function: itemName #use lower-case on the first letter
+  - class: use upper-case on the first letter  #e.g. Account
+  - attr and function: use lower-case on the first letter  #e.g. itemName
 
 ## Install Virtual Environment for Django
 1. cmd 輸入
@@ -65,25 +65,24 @@ rmvirtualenv name_of_environment — 刪除指定的環境
 
 
 ## Launch Django
-<code><pre>
+```
 (Need to install virtual environment first)
-
 (cd to Envs)
 workon <environment_name>
 (cd to NTU_Lost)
 python manage.py runserver
 http://localhost:8000/api/orders/
-</code></pre>
+```
 
 ## Launch React
-<code><pre>
+```
 (cd to NTU_Lost\react_frontend)
 npm start
-</code></pre>
+```
 
 ## Migrate model to your PostgreSQL
-<code><pre>
+```
 (cd to NTU_Lost)
 python manage.py makemigrations ntulost
 python manage.py migrate
-</code></pre>
+```
