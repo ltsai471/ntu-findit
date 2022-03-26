@@ -18,12 +18,6 @@
             - OrderRow
     - second_page (OrderDetail)
 
-## Migrate model to your PostgreSQL
-```
-(cd to NTU_Lost)
-python manage.py makemigrations ntulost
-python manage.py migrate
-```
 
 ## Referance
 - [django-and-react tutorial](https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react)

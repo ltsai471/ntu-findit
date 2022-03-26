@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-# tmp model
+# model interface example for frontend, those will be deleted after new frontend built
 class Order(models.Model):
     id = models.CharField(max_length=20, primary_key=True)
     customer = models.CharField(max_length=20)
@@ -19,16 +19,16 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f'{self.order} ({self.item_name})'
-# tmp model end
+# model end
 
 class Account(models.Model):
-    mail_id = models.CharField(max_length=200, primary_key=True)
+    mailId = models.CharField(max_length=200, primary_key=True)
     name = models.CharField(max_length=10)
     pwd = models.CharField(max_length=200)
     photo = models.ImageField()
-    confirm_flag = models.CharField(max_length=1)
-    last_log_time = models.DateTimeField()
-    edit_datetime = models.DateTimeField()
+    confirmFlag = models.CharField(max_length=1)
+    lastLogTime = models.DateTimeField()
+    editDatetime = models.DateTimeField()
 
     def __str__(self):
         return self.name
@@ -36,40 +36,40 @@ class Account(models.Model):
 
 class Item(models.Model):
     id = models.IntegerField(primary_key=True)
-    found_or_loss = models.CharField(max_length=5)
+    foundOrLoss = models.CharField(max_length=5)
     status = models.CharField(max_length=1)
-    account_id = models.CharField(max_length=200)
-    loss_datetime = models.DateTimeField()
-    item_place = models.CharField(max_length=200)
-    preserve_place = models.CharField(max_length=200)
-    item_type = models.CharField(max_length=200)
-    item_desc = models.CharField(max_length=1000)
+    accountId = models.CharField(max_length=200)
+    lossDatetime = models.DateTimeField()
+    itemPlace = models.CharField(max_length=200)
+    preservePlace = models.CharField(max_length=200)
+    itemType = models.CharField(max_length=200)
+    itemDesc = models.CharField(max_length=1000)
     img = models.ImageField()
-    close_datetime = models.DateTimeField()
-    item_owner_id = models.CharField(max_length=200)
-    edit_datetime = models.DateTimeField()
+    closeDatetime = models.DateTimeField()
+    itemOwnerId = models.CharField(max_length=200)
+    editDatetime = models.DateTimeField()
     
     def __str__(self):
         return self.id
 
 
-class Item_type_level_1(models.Model):
-    level1_id = models.IntegerField(primary_key=True)
+class ItemTypeLevel1(models.Model):
+    level1Id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=200)
-    edit_datetime = models.DateTimeField()
+    editDatetime = models.DateTimeField()
 
     def __str__(self):
         return self.level1_id
 
 
-class Item_type_level_2(models.Model):
+class ItemTypeLevel2(models.Model):
     class Meta:
-        unique_together = (('level1_id', 'level2_id'),)
+        unique_together = (('level1Id', 'level2Id'),)
 
-    level1_id = models.ForeignKey('Item_type_level_1', related_name='level2_items', on_delete=models.SET_NULL, null=True)
-    level2_id = models.IntegerField()
+    level1Id = models.ForeignKey('ItemTypeLevel1', related_name='level2Items', on_delete=models.SET_NULL, null=True)
+    level2Id = models.IntegerField()
     name = models.CharField(max_length=200)
-    edit_datetime = models.DateTimeField()
+    editDatetime = models.DateTimeField()
 
     def __str__(self):
         return self.level1_id, self.level2_id
@@ -77,15 +77,15 @@ class Item_type_level_2(models.Model):
 
 class Chatroom(models.Model):
     id = models.IntegerField(primary_key=True)
-    account_1 = models.CharField(max_length=200)
-    account_2 = models.CharField(max_length=200)
-    item_id = models.ForeignKey('Item', on_delete=models.SET_NULL, null=True)
+    account1 = models.CharField(max_length=200)
+    account2 = models.CharField(max_length=200)
+    itemId = models.ForeignKey('Item', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.id
 
 
-class Chat_context(models.Model):
+class ChatContext(models.Model):
     class Meta:
         unique_together = (('chatroom', 'seq'),)
 
@@ -93,7 +93,7 @@ class Chat_context(models.Model):
     seq = models.IntegerField(primary_key=True)
     send_account = models.CharField(max_length=200)
     context = models.CharField(max_length=200)
-    send_datetime = models.DateTimeField()
+    sendDatetime = models.DateTimeField()
 
     def __str__(self):
         return self.chatroom_id, self.seq
