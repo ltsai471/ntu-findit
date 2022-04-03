@@ -83,8 +83,10 @@ DATABASES = {
         'NAME': 'ntu_lost',
         'USER': 'root',
         'PASSWORD': 'secure1234',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'HOST': '140.112.106.237',
+        'PORT': '16891',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '5432',
     }
 }
 
