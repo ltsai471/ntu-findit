@@ -2,7 +2,7 @@
 
 ## GIT
 - create branch and switch to branch
-<code><pre>
+<pre><code>
 git checkout -b "your_branch_name"
 </pre></code>
 
@@ -85,7 +85,7 @@ python -m pip freeze > requirements.txt
 activate
 (cd to NTU_Lost)
 python manage.py runserver
-(Open link in website)
+// Open link in website)
 http://localhost:8000/api/orders/
 </code></pre>
 
