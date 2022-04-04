@@ -2,7 +2,7 @@
 
 ## GIT
 - create branch and switch to branch
-<pre><code>
+<code><pre>
 git checkout -b "your_branch_name"
 </pre></code>
 
@@ -10,7 +10,7 @@ git checkout -b "your_branch_name"
 <code><pre>
 git add "file_or_folder"
 git commit -am "commit_name"
-</code></pre>
+</pre></code>
 
 - if your branch is behind master, merge master to branch
 <code><pre>
@@ -85,7 +85,7 @@ python -m pip freeze > requirements.txt
 activate
 (cd to NTU_Lost)
 python manage.py runserver
-// Open link in website)
+(Open link in website)
 http://localhost:8000/api/orders/
 </code></pre>
 
