@@ -80,11 +80,6 @@ WSGI_APPLICATION = 'hw_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'postgres',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'secure1234',
-        # 'HOST': '127.0.0.1',
-        # 'PORT': '5432',
         'NAME': 'ntu_lost',
         'USER': 'root',
         'PASSWORD': 'secure1234',

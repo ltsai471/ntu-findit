@@ -48,6 +48,8 @@ class MainViewset(viewsets.ModelViewSet):
         return render(request,"test.html")
     # @action(detail=True, methods=['get'],name='show')
     def show(self, request):
+        queryset=Item.objects.all()
+        serializer = FilterItemSerializer(queryset, many=True)
 
         return render(request,"test.html")
 
