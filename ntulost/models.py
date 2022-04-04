@@ -49,11 +49,12 @@ class Item(models.Model):
     preservePlace = models.CharField(max_length=200)
     ITEMTYPE=(
         ('Student ID Card','Student ID Card'),
-        ('future', 'future'),
+        ('Umbrella', 'Umbrella'),
+        ("book","book")
     )
     itemType = models.CharField(max_length=200,choices=ITEMTYPE)
     itemDesc = models.CharField(max_length=1000)
-    img = models.ImageField()
+    img = models.ImageField(upload_to='images')
     closeDatetime = models.DateTimeField(blank=True,null=True)
     itemOwnerId = models.CharField(max_length=200,blank=True,null=True)
     editDatetime = models.DateTimeField()

@@ -17,7 +17,13 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         {%csrf_token %}
-        <input id="search"type="text">
+        <input id="itemPlace"type="text">
+        </input>
+        <input id="itemType"type="text">
+        </input>
+        <input id="startDatetime"type="date">
+        </input>
+        <input id="endDatetime" type="date">
         </input>
         <button id="fbutton">Filter</button>
         <content></content>
@@ -30,19 +36,25 @@
                 console.log(csrf)
                 $("#fbutton").click(function(){
 
+
                     $.ajax({
-                        url:"",
+                        url:"http://127.0.0.1:8000/api/main/",
                         type:'post',
                         data:{
-                            itemPlace:$('#search').val(),
+                            itemPlace:$('#itemPlace').val(),
+                            itemType:$('#itemType').val(),
+                            startDatetime:$('#startDatetime').val(),
+                            endDatetime:$('#endDatetime').val(),
+
                             csrfmiddlewaretoken:csrf
                         },
                         success:function(response){
-
+                            for (let i = 0; i<response.length;i++){
                                 $("content").append(
-                                    '<text>'+response+'</text>'
 
-                                )
+                                    '<br><text>'+response[i].itemPlace+'</text>'
+
+                                )}
 
                         }
                     })})
