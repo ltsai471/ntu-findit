@@ -60,16 +60,15 @@ python manage.py runserver
 </code></pre>
 
 4. URL輸入
-```
+<code><pre>
 http://127.0.0.1:8000/
-
+</code></pre>
 補充: 虛擬環境指令
 deactivate — 退出當前的Python虛擬環境
 workon — 列出可用的虛擬環境
 activate 或 workon name_of_environment — 激活指定的Python虛擬環境
 workon SDM_environment
 rmvirtualenv name_of_environment — 刪除指定的環境
-```
 
 5. install packages from requirements.txt
 <code><pre>
