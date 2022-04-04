@@ -17,14 +17,21 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         {%csrf_token %}
+        <label>地點</label>
         <input id="itemPlace"type="text">
+        </input><br>
+        <label>分類</label>
+        <label>大項</label>
+        <input id="itemTypeLevel1"type="text"></input>
+        <label>細項</label>
+        <input id="itemTypeLevel2"type="text">
+        </input><br>
+        <label>時間開始</label>
+        <input id="startDatetime"type="datetime-local">
         </input>
-        <input id="itemType"type="text">
-        </input>
-        <input id="startDatetime"type="date">
-        </input>
-        <input id="endDatetime" type="date">
-        </input>
+        <label>時間結束</label>
+        <input id="endDatetime" type="datetime-local">
+        </input><br>
         <button id="fbutton">Filter</button>
         <content></content>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
@@ -42,18 +49,21 @@
                         type:'post',
                         data:{
                             itemPlace:$('#itemPlace').val(),
-                            itemType:$('#itemType').val(),
+                            itemTypeLevel1:$('#itemTypeLevel1').val(),
+                            itemTypeLevel2:$('#itemTypeLevel2').val(),
                             startDatetime:$('#startDatetime').val(),
                             endDatetime:$('#endDatetime').val(),
 
                             csrfmiddlewaretoken:csrf
                         },
                         success:function(response){
+                            $("content").empty()
                             for (let i = 0; i<response.length;i++){
+
                                 $("content").append(
 
-                                    '<br><text>'+response[i].itemPlace+'</text>'
-
+                                    '<br><text>'+response[i].itemPlace+'</text>',
+                                    '<br><img src=\"'+response[i].img+"\" alt='img'></img>"
                                 )}
 
                         }
