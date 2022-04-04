@@ -22,12 +22,13 @@ from ntulost import views
 
 router = routers.DefaultRouter()
 router.register(r'orders', views.OrderView, 'order')
-
+mainrouter=routers.DefaultRouter()
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('ntulost/', include('ntulost.urls')),
     path('', RedirectView.as_view(url='/ntulost/')),
+
 ]
 
 

@@ -37,20 +37,29 @@ class Account(models.Model):
 class Item(models.Model):
     id = models.IntegerField(primary_key=True)
     foundOrLoss = models.CharField(max_length=5)
-    status = models.CharField(max_length=1)
+    STATUS=(
+        ('U','U'),
+        ('D', 'D'),
+        ('C', 'C'),
+    )
+    status = models.CharField(max_length=1,choices=STATUS)
     accountId = models.CharField(max_length=200)
     lossDatetime = models.DateTimeField()
     itemPlace = models.CharField(max_length=200)
     preservePlace = models.CharField(max_length=200)
-    itemType = models.CharField(max_length=200)
+    ITEMTYPE=(
+        ('Student ID Card','Student ID Card'),
+        ('future', 'future'),
+    )
+    itemType = models.CharField(max_length=200,choices=ITEMTYPE)
     itemDesc = models.CharField(max_length=1000)
     img = models.ImageField()
-    closeDatetime = models.DateTimeField()
-    itemOwnerId = models.CharField(max_length=200)
+    closeDatetime = models.DateTimeField(blank=True,null=True)
+    itemOwnerId = models.CharField(max_length=200,blank=True,null=True)
     editDatetime = models.DateTimeField()
-    
+
     def __str__(self):
-        return self.id
+        return self.itemDesc #should be a string
 
 
 class ItemTypeLevel1(models.Model):
@@ -59,7 +68,8 @@ class ItemTypeLevel1(models.Model):
     editDatetime = models.DateTimeField()
 
     def __str__(self):
-        return self.level1_id
+        return self.name
+
 
 
 class ItemTypeLevel2(models.Model):
@@ -72,7 +82,7 @@ class ItemTypeLevel2(models.Model):
     editDatetime = models.DateTimeField()
 
     def __str__(self):
-        return self.level1_id, self.level2_id
+        return self.level1Id, self.level2Id
 
 
 class Chatroom(models.Model):
