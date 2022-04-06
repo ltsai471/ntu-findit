@@ -22,9 +22,13 @@ class OrderView(viewsets.ModelViewSet):
 
         return queryset
 #ian
+
+
 class TestView(View):
     def get(self,request):
         return render(request,"test.html")
+
+#之後主頁面的功能可以統一放這
 class MainViewset(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
@@ -43,6 +47,7 @@ class MainViewset(viewsets.ModelViewSet):
     # @action(d etail=True, methods=['post'],name='filter')
     def filter(self, request):
         #取得request.Post 的 data
+
         itemPlace=request.POST.get("itemPlace")
         itemTypeLevel1=request.POST.get("itemTypeLevel1")
         itemTypeLevel2=request.POST.get("itemTypeLevel2")
@@ -52,8 +57,8 @@ class MainViewset(viewsets.ModelViewSet):
         if itemPlace==None:
             itemPlace=""
         # 分類
-        if itemTypeLevel1!="" and itemTypeLevel2!="":
-            print("大項細項都有")
+        if itemTypeLevel1 not in ["",None]  and itemTypeLevel2 not in ["",None]:
+            # print("大項細項都有")
 
             itemTypeLevel2_list=[itemTypeLevel2]
             print("細項:")
@@ -69,7 +74,7 @@ class MainViewset(viewsets.ModelViewSet):
                 itemTypeLevel2_list.append(itemTypeLevel2.name)
             print("細項:")
             print(itemTypeLevel2_list)
-        if itemTypeLevel1=="" and itemTypeLevel2=="":
+        if itemTypeLevel1 in ["",None] and itemTypeLevel2 in ["",None]:
             print("大項細項都沒有")
             itemTypeLevel1_id=[]
             for itemtypelevel1 in ItemTypeLevel1.objects.all():
@@ -81,9 +86,9 @@ class MainViewset(viewsets.ModelViewSet):
             print(itemTypeLevel2_list)
             # itemTypeLevel2=ItemTypeLevel2.objects.filter(level1Id__in=itemTypeLevel1_id).name
         #時間範圍搜尋
-        if startDatetime=="" :
+        if startDatetime in ["",None]  :
             startDatetime=datetime.datetime(2020,7,1,1,30)
-        if endDatetime=="" :
+        if endDatetime in ["",None] :
             endDatetime=datetime.datetime(2022,7,1,1,30)
 
 
@@ -111,13 +116,10 @@ class MainViewset(viewsets.ModelViewSet):
 
         # return Response({'items': queryset})
         return queryset
-    # @action(detail=True, methods=['get'],name='filter')
-    # def filter(self, request):
-
+    # def list(self, request):
+    #     queryset = Item.objects.all()
+    #     serializer = FilterItemSerializer(queryset, many=True)
     #     return render(request,"test.html")
 
-    def list(self, request):
-        queryset = Item.objects.all()
-        serializer = FilterItemSerializer(queryset, many=True)
-        return render(request,"test.html")
+
 
