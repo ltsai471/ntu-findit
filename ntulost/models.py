@@ -38,20 +38,20 @@ class Item(models.Model):
     id = models.IntegerField(primary_key=True)
     foundOrLoss = models.CharField(max_length=5)
     STATUS=(
-        ('U','U'),
-        ('D', 'D'),
-        ('C', 'C'),
+        ('U','U'), #尋找中
+        ('D', 'D'), # 已尋回
+        ('C', 'C'), # 聯絡中
     )
     status = models.CharField(max_length=1,choices=STATUS)
     accountId = models.CharField(max_length=200)
     lossDatetime = models.DateTimeField()
     itemPlace = models.CharField(max_length=200)
     preservePlace = models.CharField(max_length=200)
-    ITEMTYPE=(
-        ('Student ID Card','Student ID Card'),
-        ('Umbrella', 'Umbrella'),
-        ("book","book")
-    )
+    # ITEMTYPE=(
+    #     ('Student ID Card','Student ID Card'),
+    #     ('Umbrella', 'Umbrella'),
+    #     ("book","book")
+    # )
     itemType = models.CharField(max_length=200,choices=ITEMTYPE)
     itemDesc = models.CharField(max_length=1000)
     img = models.ImageField(upload_to='images')
