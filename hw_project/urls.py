@@ -23,18 +23,18 @@ from ntulost import views
 router = routers.DefaultRouter()
 router.register(r'orders', views.OrderView, 'order')
 
-mainrouter=routers.DefaultRouter()
-mainlist=views.MainViewset.as_view({
+# mainRouter=routers.DefaultRouter()
+mainList=views.MainViewset.as_view({
     "post": 'filter', #post
     "get": 'show'
     })
-mainrouter.register(r'item', views.MainViewset, 'item')
+# mainRouter.register(r'item', views.MainViewset, 'item')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('api/main/', mainlist, name='main'),
+    path('api/main/', mainList, name='main'),
     # path('item', include(mainrouter.urls)),
     path('api/test/', views.TestView.as_view(), name='test'),
     path('ntulost/', include('ntulost.urls')),
