@@ -1,3 +1,4 @@
+export { default as LoginPage } from "./LoginPage";
 export { default as Navigation } from "./Navigation";
 export { default as Footer } from "./Footer";
 // export { default as Blog } from "./blog/Blog";
