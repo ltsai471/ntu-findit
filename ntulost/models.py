@@ -28,26 +28,25 @@ class Account(models.Model):
     photo = models.ImageField()
     confirmFlag = models.CharField(max_length=1)
     lastLogTime = models.DateTimeField()
-    editDatetime = models.DateTimeField()
+    editDatetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
 
 
 class Item(models.Model):
-    id = models.IntegerField(primary_key=True)
     foundOrLoss = models.CharField(max_length=5)
     status = models.CharField(max_length=1)
     accountId = models.CharField(max_length=200)
     lossDatetime = models.DateTimeField()
     itemPlace = models.CharField(max_length=200)
-    preservePlace = models.CharField(max_length=200)
+    preservePlace = models.CharField(max_length=200, null=True)
     itemType = models.CharField(max_length=200)
     itemDesc = models.CharField(max_length=1000)
-    img = models.ImageField()
-    closeDatetime = models.DateTimeField()
-    itemOwnerId = models.CharField(max_length=200)
-    editDatetime = models.DateTimeField()
+    img = models.ImageField(null=True)
+    closeDatetime = models.DateTimeField(null=True)
+    itemOwnerId = models.CharField(max_length=200, null=True)
+    editDatetime = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.id
@@ -56,7 +55,7 @@ class Item(models.Model):
 class ItemTypeLevel1(models.Model):
     level1Id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=200)
-    editDatetime = models.DateTimeField()
+    editDatetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.level1_id
@@ -69,14 +68,13 @@ class ItemTypeLevel2(models.Model):
     level1Id = models.ForeignKey('ItemTypeLevel1', related_name='level2Items', on_delete=models.SET_NULL, null=True)
     level2Id = models.IntegerField()
     name = models.CharField(max_length=200)
-    editDatetime = models.DateTimeField()
+    editDatetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.level1_id, self.level2_id
 
 
 class Chatroom(models.Model):
-    id = models.IntegerField(primary_key=True)
     account1 = models.CharField(max_length=200)
     account2 = models.CharField(max_length=200)
     itemId = models.ForeignKey('Item', on_delete=models.SET_NULL, null=True)
@@ -91,9 +89,9 @@ class ChatContext(models.Model):
 
     chatroom = models.ForeignKey('Chatroom', related_name='contexts', on_delete=models.SET_NULL, null=True)
     seq = models.IntegerField(primary_key=True)
-    send_account = models.CharField(max_length=200)
+    sendAccount = models.CharField(max_length=200)
     context = models.CharField(max_length=200)
-    sendDatetime = models.DateTimeField()
+    sendDatetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.chatroom_id, self.seq
