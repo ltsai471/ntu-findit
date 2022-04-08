@@ -18,6 +18,7 @@ from django.urls import path
 from django.conf.urls import include
 from django.views.generic import RedirectView
 from rest_framework import routers
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 from ntulost import views
 
 router = routers.DefaultRouter()
@@ -28,6 +29,9 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('ntulost/', include('ntulost.urls')),
     path('', RedirectView.as_view(url='/ntulost/')),
+    path('api-token-auth/', obtain_jwt_token),
+    path('api-token-verify/', verify_jwt_token),
+    path('api-token-refresh/', refresh_jwt_token),
 ]
 
 
