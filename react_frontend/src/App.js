@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./index.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { getAuthToken } from "./utils";
 import { verifyAccount } from "./webAPI";
@@ -12,6 +11,8 @@ import {
     OrderDetail,
     ApplyLossPage,
     TestPage,
+    SignIn,
+    SignUp,
 } from "./components";
 
 
@@ -31,15 +32,17 @@ export default function App() {
     return (
         <AuthContext.Provider value={{ user, setUser }}>
             <Router>
-                <Navigation />
+                {/* <Navigation /> */}
                 <Routes>
-                    <Route path="/login" element={<LoginPage />} />
+                    {/* <Route path="/login" element={<LoginPage />} /> */}
+                    <Route path="/" element={<SignIn />} />
+                    <Route path="/signUp" element={<SignUp />} />
                     {/* <Route path="/applyloss " element={<ApplyLossPage />} />
                     <Route path="/test " element={<TestPage />} /> */}
-                    <Route path="/order" element={<OrderListContainer />} />
-                    <Route path="/order/:orderDetail" element={<OrderDetail />} />
+                    {/* <Route path="/order" element={<OrderListContainer />} /> */}
+                    {/* <Route path="/order/:orderDetail" element={<OrderDetail />} /> */}
                 </Routes>
-                <Footer />
+                {/* <Footer /> */}
             </Router>
         </AuthContext.Provider>
     );
