@@ -1,4 +1,4 @@
-import dj_database_url
+#import dj_database_url
 from .settings import * # 含入原本的settings.py所有設定
 # heroku使用的資料庫為PostgreSQL，所以要修改資料庫設定
 #DATABASES = {
