@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from ntulost.views import MainViewset
 from rest_framework import routers
 from ntulost import views
 # mainrouter=routers.DefaultRouter()

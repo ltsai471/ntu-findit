@@ -13,11 +13,14 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ('id', 'customer', 'items')
-#('id', 'foundOrLoss',"itemPlace","itemType","img")
+#filter完後response的資料
 class FilterItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = ('id', 'foundOrLoss',"itemPlace","itemType","img")
+        fields = ('id',"lossDatetime", "preservePlace",'status',"itemPlace","itemType","img")
 
-
+class ItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item
+        fields = ("id", "foundOrLoss", "status", "accountId", "lossDatetime", "itemPlace", "preservePlace", "itemType", "itemDesc", "img", "closeDatetime", "itemOwnerId", "editDatetime")
 

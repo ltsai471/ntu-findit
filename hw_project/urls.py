@@ -22,26 +22,24 @@ from ntulost import views
 
 router = routers.DefaultRouter()
 router.register(r'orders', views.OrderView, 'order')
+#跟Item有關的url
+itemRouter = routers.DefaultRouter()
+itemRouter.register(r'item', views.ItemViewSet, 'item')
 
-# mainRouter=routers.DefaultRouter()
-mainList=views.MainViewset.as_view({
-    "post": 'filter', #post
-    "get": 'show'
-    })
-# mainRouter.register(r'item', views.MainViewset, 'item')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('api/main/', mainList, name='main'),
-    # path('item', include(mainrouter.urls)),
+    path('api/', include(itemRouter.urls)),
+    # path('api/main/', include(mainRouter.urls)),
     path('api/test/', views.TestView.as_view(), name='test'),
     path('ntulost/', include('ntulost.urls')),
     path('', RedirectView.as_view(url='/api/main/')),
 
 ]
-
+# path('api/Item/getItemByID/', views.getItemByID, name='lostitem'),
+#     path('api/Item/getUserLostItem/', views.getUserLostItem, name='userlostitem'),
 
 from django.conf import settings
 from django.conf.urls.static import static

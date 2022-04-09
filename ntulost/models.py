@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
+from phonenumber_field.modelfields import PhoneNumberField
 # model interface example for frontend, those will be deleted after new frontend built
 class Order(models.Model):
     id = models.CharField(max_length=20, primary_key=True)
@@ -25,9 +25,10 @@ class Account(models.Model):
     mailId = models.CharField(max_length=200, primary_key=True)
     name = models.CharField(max_length=10)
     pwd = models.CharField(max_length=200)
-    photo = models.ImageField()
-    confirmFlag = models.CharField(max_length=1)
-    lastLogTime = models.DateTimeField()
+    phoneNumber=PhoneNumberField(default="0971017647") #add phoneNumer
+    photo = models.ImageField(blank=True,null=True)
+    confirmFlag = models.CharField(max_length=1,blank=True,null=True)
+    lastLogTime = models.DateTimeField(blank=True,null=True)
     editDatetime = models.DateTimeField()
 
     def __str__(self):
@@ -50,17 +51,17 @@ class Item(models.Model):
     # ITEMTYPE=(
     #     ('Student ID Card','Student ID Card'),
     #     ('Umbrella', 'Umbrella'),
-    #     ("book","book")
+    #     ("Book","Book")
     # )
-    itemType = models.CharField(max_length=200,choices=ITEMTYPE)
+    itemType = models.CharField(max_length=200,)#choices=ITEMTYPE
     itemDesc = models.CharField(max_length=1000)
-    img = models.ImageField(upload_to='images')
+    img = models.ImageField(upload_to='images',null=True)
     closeDatetime = models.DateTimeField(blank=True,null=True)
     itemOwnerId = models.CharField(max_length=200,blank=True,null=True)
     editDatetime = models.DateTimeField()
 
     def __str__(self):
-        return self.itemDesc #should be a string
+        return (str)(self.id) #should be a string
 
 
 class ItemTypeLevel1(models.Model):
@@ -78,7 +79,7 @@ class ItemTypeLevel2(models.Model):
         unique_together = (('level1Id', 'level2Id'),)
 
     level1Id = models.ForeignKey('ItemTypeLevel1', related_name='level2Items', on_delete=models.SET_NULL, null=True)
-    level2Id = models.IntegerField()
+    level2Id = models.IntegerField(primary_key=True) #修正加上primary_key
     name = models.CharField(max_length=200)
     editDatetime = models.DateTimeField()
 
@@ -108,3 +109,11 @@ class ChatContext(models.Model):
 
     def __str__(self):
         return self.chatroom_id, self.seq
+#還需要再加保管據點的entity
+
+class PreservePlace(models.Model):
+    id=models.IntegerField(primary_key=True)
+    name=models.CharField(max_length=200)
+    phoneNumber=PhoneNumberField(default="0971017647")
+    img=models.ImageField()
+    address=models.CharField(max_length=200)

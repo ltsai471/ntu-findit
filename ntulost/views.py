@@ -1,14 +1,15 @@
 from django.shortcuts import render,get_object_or_404,get_list_or_404
 from django.views import View
-from django.http import JsonResponse
-from rest_framework import viewsets
-from .serializers import OrderSerializer ,FilterItemSerializer
+from django.http import JsonResponse,Http404
+from rest_framework import viewsets,status
+from .serializers import OrderSerializer ,FilterItemSerializer,ItemSerializer
 from .models import Order,Item,ItemTypeLevel2,ItemTypeLevel1
 from rest_framework.response import Response
 from rest_framework.decorators import action #ian
 from rest_framework import renderers #ian
 from rest_framework.renderers import JSONRenderer,TemplateHTMLRenderer
 import datetime
+from rest_framework.decorators import api_view
 # Create your views here.
 
 class OrderView(viewsets.ModelViewSet):
@@ -28,98 +29,89 @@ class TestView(View):
     def get(self,request):
         return render(request,"test.html")
 
-#之後主頁面的功能可以統一放這
-class MainViewset(viewsets.ModelViewSet):
+#跟Item有關的API
+class ItemViewSet(viewsets.ModelViewSet):
     """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions.
-
-    Additionally we also provide an extra `highlight` action.
+    A simple ViewSet for listing or retrieving users.
     """
-    #api使用測試
-    # renderer_classes = [TemplateHTMLRenderer]
-
-    # template_name = 'items.html'
-
     queryset = Item.objects.all()
-    serializer_class = FilterItemSerializer(queryset, many=True)
+    serializer_class = ItemSerializer
+    # permission_classes = [IsAccountAdminOrReadOnly]
+    def list(self, request):
+        queryset = Item.objects.all()
+        serializer = ItemSerializer(queryset, many=True)
+        return Response(serializer.data)
 
-    # @action(d etail=True, methods=['post'],name='filter')
-    def filter(self, request):
+    def retrieve(self, request, pk=None):
+        queryset = Item.objects.all()
+        item = get_object_or_404(queryset, pk=pk)
+        serializer = ItemSerializer(item)
+        return Response(serializer.data)
+
+    #C-1搜尋功能
+    @action(detail=False, methods=['get'],name="filter")
+    def itemsFilter(self,request):
         #取得request.Post 的 data
 
-        itemPlace=request.POST.get("itemPlace")
-        itemTypeLevel1=request.POST.get("itemTypeLevel1")
-        itemTypeLevel2=request.POST.get("itemTypeLevel2")
-        print(itemTypeLevel2)
-        startDatetime=request.POST.get("startDatetime")
-        endDatetime=request.POST.get("endDatetime")
-        if itemPlace==None:
+        itemPlace=request.query_params.get("itemPlace")
+        itemTypeLevel1=request.query_params.get("itemTypeLevel1")
+        itemTypeLevel2=request.query_params.get("itemTypeLevel2")
+        print(request.query_params )
+
+        startDatetime=request.query_params.get("startDatetime")
+        endDatetime=request.query_params.get("endDatetime")
+        if itemPlace in ["",None]:
             itemPlace=""
         # 分類
         if itemTypeLevel1 not in ["",None]  and itemTypeLevel2 not in ["",None]:
             # print("大項細項都有")
 
             itemTypeLevel2_list=[itemTypeLevel2]
-            print("細項:")
-            print(itemTypeLevel2_list)
 
-        if itemTypeLevel1!="" and itemTypeLevel2=="":
-            print("只有大項")
+        if itemTypeLevel1 not in ["",None] and itemTypeLevel2 in ["",None]:
+            # print("只有大項")
             itemTypeLevel1_id=[]
             for itemtypelevel1 in ItemTypeLevel1.objects.filter(name=itemTypeLevel1):
                 itemTypeLevel1_id.append(itemtypelevel1.level1Id)
             itemTypeLevel2_list=[]
             for itemTypeLevel2 in get_list_or_404(ItemTypeLevel2,level1Id__in=itemTypeLevel1_id):
                 itemTypeLevel2_list.append(itemTypeLevel2.name)
-            print("細項:")
-            print(itemTypeLevel2_list)
+
         if itemTypeLevel1 in ["",None] and itemTypeLevel2 in ["",None]:
-            print("大項細項都沒有")
+            # print("大項細項都沒有")
             itemTypeLevel1_id=[]
             for itemtypelevel1 in ItemTypeLevel1.objects.all():
                 itemTypeLevel1_id.append(itemtypelevel1.level1Id)
             itemTypeLevel2_list=[]
             for itemTypeLevel2 in get_list_or_404(ItemTypeLevel2,level1Id__in=itemTypeLevel1_id):
                 itemTypeLevel2_list.append(itemTypeLevel2.name)
-            print("細項:")
-            print(itemTypeLevel2_list)
-            # itemTypeLevel2=ItemTypeLevel2.objects.filter(level1Id__in=itemTypeLevel1_id).name
+
         #時間範圍搜尋
         if startDatetime in ["",None]  :
-            startDatetime=datetime.datetime(2020,7,1,1,30)
+            startDatetime=datetime.datetime(2019,7,1,1,30)
         if endDatetime in ["",None] :
             endDatetime=datetime.datetime(2022,7,1,1,30)
 
-
-
-        filtereditem = get_list_or_404(
+        filteredItem = get_list_or_404(
         Item,
-        itemPlace__icontains=itemPlace,itemType__in=itemTypeLevel2_list,
+        # status="U",
+        itemPlace__icontains=itemPlace,
+        itemType__in=itemTypeLevel2_list,
         lossDatetime__range=(startDatetime,endDatetime)
         )
 
-        serializer = FilterItemSerializer(filtereditem, many=True)
+        serializer = FilterItemSerializer(filteredItem, many=True)
+        if serializer!=None:
 
-
-        # return Response({'items':filtereditem}) #類似傳一個context到template.html
-        return JsonResponse(serializer.data,safe=False)
-        queryset=Item.objects.all()
-        serializer = FilterItemSerializer(queryset, many=True)
-        # json = JSONRenderer().render(serializer.data)
-
-        return JsonResponse(serializer.data,safe=False)
-    # @action(detail=True, methods=['get'],name='show')
-    def show(self, request):
-        queryset=Item.objects.all()
-        serializer = FilterItemSerializer(queryset, many=True)
-
-        # return Response({'items': queryset})
-        return queryset
-    # def list(self, request):
-    #     queryset = Item.objects.all()
-    #     serializer = FilterItemSerializer(queryset, many=True)
-    #     return render(request,"test.html")
-
-
-
+            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED,safe=False)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST,safe=False)
+    #根據使用者主頁面中你的遺失物資料
+    @action(detail=False, methods=['get'],name="getlostitem by itemOwnerId")
+    def getUserLostItem(self,request):
+        itemOwnerId=request.query_params.get("itemOwnerId")
+        userLostItem = get_list_or_404(
+        Item,
+        itemOwnerId=itemOwnerId
+        )
+        serializer = ItemSerializer(userLostItem, many=True)
+        return JsonResponse(serializer.data, status=status.HTTP_200_OK,safe=False)
