@@ -36,7 +36,7 @@ class Account(models.Model):
 
 class Item(models.Model):
     foundOrLoss = models.CharField(max_length=5)
-    status = models.CharField(max_length=1)
+    status = models.CharField(max_length=10)
     accountId = models.CharField(max_length=200)
     lossDatetime = models.DateTimeField()
     itemPlace = models.CharField(max_length=200)
