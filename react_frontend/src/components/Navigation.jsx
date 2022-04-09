@@ -1,7 +1,21 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { React, useContext } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { setAuthToken } from "../utils";
+import AuthContext from "../contexts";
 
 function Navigation() {
+  const location = useLocation();
+  const { user, setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setAuthToken("");
+    setUser(null);
+    if (location.pathname !== "/") {
+      navigate("/");
+    }
+  };
+
   return (
     <div className="navigation">
       <nav className="navbar navbar-expand navbar-dark bg-dark">
@@ -9,21 +23,24 @@ function Navigation() {
           <NavLink className="navbar-brand" to="/">
             Order Application
           </NavLink>
-          {/* <div>
+
+          <div>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <NavLink className="nav-link" to="/">
-                  Home
-                  <span className="sr-only">(current)</span>
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/blog">
-                  Blog
-                </NavLink>
+                {!user && (
+                  <NavLink className="nav-link" to="/login">
+                    Login
+                    {/* <span className="sr-only">(current)</span> */}
+                  </NavLink>
+                )}
+                {user && (
+                  <NavLink className="nav-link" to="/login" onClick={handleLogout}>
+                    Logout
+                  </NavLink>
+                )}
               </li>
             </ul>
-          </div> */}
+          </div>
         </div>
       </nav>
     </div>
