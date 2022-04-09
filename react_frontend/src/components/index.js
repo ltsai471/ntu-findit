@@ -10,3 +10,5 @@ export { default as SearchBar } from "./orderList/SearchBar";
 export { default as OrderList } from "./orderList/OrderList";
 export { default as OrderRow } from "./orderList/OrderRow";
 export { default as OrderDetail } from "./orderList/second_page";
+export { default as ApplyLossPage } from "./test/ApplyLoss";
+export { default as TestPage } from "./test/test";

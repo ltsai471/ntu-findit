@@ -29,9 +29,9 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('ntulost/', include('ntulost.urls')),
     path('', RedirectView.as_view(url='/ntulost/')),
-    path('api-token-auth/', obtain_jwt_token),
-    path('api-token-verify/', verify_jwt_token),
-    path('api-token-refresh/', refresh_jwt_token),
+    # path('api-token-auth/', obtain_jwt_token),
+    # path('api-token-verify/', verify_jwt_token),
+    # path('api-token-refresh/', refresh_jwt_token),
 ]
 
 

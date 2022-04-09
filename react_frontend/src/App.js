@@ -10,6 +10,8 @@ import {
     Footer,
     OrderListContainer,
     OrderDetail,
+    ApplyLossPage,
+    TestPage,
 } from "./components";
 
 
@@ -32,8 +34,10 @@ export default function App() {
                 <Navigation />
                 <Routes>
                     <Route path="/login" element={<LoginPage />} />
-                    <Route path="/" element={<OrderListContainer />} />
-                    <Route path="/:orderDetail" element={<OrderDetail />} />
+                    {/* <Route path="/applyloss " element={<ApplyLossPage />} />
+                    <Route path="/test " element={<TestPage />} /> */}
+                    <Route path="/order" element={<OrderListContainer />} />
+                    <Route path="/order/:orderDetail" element={<OrderDetail />} />
                 </Routes>
                 <Footer />
             </Router>
