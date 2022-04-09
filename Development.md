@@ -1,5 +1,8 @@
 # Development
 
+## NOTICE!!
+- 如果有DB相關的問題一定要跟祐琳講!! (欄位看不懂或不知道要填什麼、欄位增刪、必輸欄位取消、pk自動給號 etc.)
+
 ## GIT
 - create branch and switch to branch
 <code><pre>
@@ -30,6 +33,8 @@ git push
 - Use Camel-Case to name all variables
   - class: use upper-case on the first letter  #e.g. Account
   - attr and function: use lower-case on the first letter  #e.g. itemName
+- Use RESTful API
+  - https://ithelp.ithome.com.tw/articles/10194229
 
 ## Install Virtual Environment for Django (for Windows 10 ptrhon 3.9)
 1. cmd 輸入
@@ -64,11 +69,13 @@ python manage.py runserver
 http://127.0.0.1:8000/
 </code></pre>
 補充: 虛擬環境指令
+<code><pre>
 deactivate — 退出當前的Python虛擬環境
 workon — 列出可用的虛擬環境
 activate 或 workon name_of_environment — 激活指定的Python虛擬環境
 workon SDM_environment
 rmvirtualenv name_of_environment — 刪除指定的環境
+</code></pre>
 
 5. install packages from requirements.txt
 <code><pre>
