@@ -19,13 +19,13 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f'{self.order} ({self.item_name})'
-# model end
+
 
 class Account(models.Model):
     mailId = models.CharField(max_length=200, primary_key=True)
     name = models.CharField(max_length=10)
     pwd = models.CharField(max_length=200)
-    phoneNumber=PhoneNumberField(default="0971017647") #add phoneNumer
+    phoneNumber=PhoneNumberField(default="0971017647")
     photo = models.ImageField(blank=True,null=True)
     confirmFlag = models.CharField(max_length=1,blank=True,null=True)
     lastLogTime = models.DateTimeField(blank=True,null=True)
@@ -39,21 +39,17 @@ class Item(models.Model):
     id = models.IntegerField(primary_key=True)
     foundOrLoss = models.CharField(max_length=5)
     STATUS=(
-        ('U','U'), #尋找中
-        ('D', 'D'), # 已尋回
-        ('C', 'C'), # 聯絡中
+        ('U','U'), #尋找中 Unfound
+        ('D', 'D'), # 已尋回 Done
+        ('C', 'C'), # 聯絡中 Connecting
     )
     status = models.CharField(max_length=1,choices=STATUS)
     accountId = models.CharField(max_length=200)
     lossDatetime = models.DateTimeField()
     itemPlace = models.CharField(max_length=200)
     preservePlace = models.CharField(max_length=200)
-    # ITEMTYPE=(
-    #     ('Student ID Card','Student ID Card'),
-    #     ('Umbrella', 'Umbrella'),
-    #     ("Book","Book")
-    # )
-    itemType = models.CharField(max_length=200,)#choices=ITEMTYPE
+
+    itemType = models.CharField(max_length=200,)
     itemDesc = models.CharField(max_length=1000)
     img = models.ImageField(upload_to='images',null=True)
     closeDatetime = models.DateTimeField(blank=True,null=True)
@@ -79,7 +75,7 @@ class ItemTypeLevel2(models.Model):
         unique_together = (('level1Id', 'level2Id'),)
 
     level1Id = models.ForeignKey('ItemTypeLevel1', related_name='level2Items', on_delete=models.SET_NULL, null=True)
-    level2Id = models.IntegerField(primary_key=True) #修正加上primary_key
+    level2Id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=200)
     editDatetime = models.DateTimeField()
 
@@ -109,7 +105,7 @@ class ChatContext(models.Model):
 
     def __str__(self):
         return self.chatroom_id, self.seq
-#還需要再加保管據點的entity
+
 
 class PreservePlace(models.Model):
     id=models.IntegerField(primary_key=True)

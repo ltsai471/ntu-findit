@@ -5,8 +5,8 @@ from rest_framework import viewsets,status
 from .serializers import OrderSerializer ,FilterItemSerializer,ItemSerializer
 from .models import Order,Item,ItemTypeLevel2,ItemTypeLevel1
 from rest_framework.response import Response
-from rest_framework.decorators import action #ian
-from rest_framework import renderers #ian
+from rest_framework.decorators import action
+from rest_framework import renderers
 from rest_framework.renderers import JSONRenderer,TemplateHTMLRenderer
 import datetime
 from rest_framework.decorators import api_view
@@ -22,14 +22,14 @@ class OrderView(viewsets.ModelViewSet):
             queryset = Order.objects.filter(customer__icontains=para)
 
         return queryset
-#ian
+
 
 
 class TestView(View):
     def get(self,request):
         return render(request,"test.html")
 
-#跟Item有關的API
+
 class ItemViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for listing or retrieving users.
@@ -48,28 +48,27 @@ class ItemViewSet(viewsets.ModelViewSet):
         serializer = ItemSerializer(item)
         return Response(serializer.data)
 
-    #C-1搜尋功能
-    @action(detail=False, methods=['get'],name="filter")
+
+    @action(detail=False, methods=['post'],name="filter")
     def itemsFilter(self,request):
-        #取得request.Post 的 data
 
-        itemPlace=request.query_params.get("itemPlace")
-        itemTypeLevel1=request.query_params.get("itemTypeLevel1")
-        itemTypeLevel2=request.query_params.get("itemTypeLevel2")
-        print(request.query_params )
 
-        startDatetime=request.query_params.get("startDatetime")
-        endDatetime=request.query_params.get("endDatetime")
+        itemPlace=request.data.get("itemPlace")
+        itemTypeLevel1=request.data.get("itemTypeLevel1")
+        itemTypeLevel2=request.data.get("itemTypeLevel2")
+        print(request.data )
+
+        startDatetime=request.data.get("startDatetime")
+        endDatetime=request.data.get("endDatetime")
         if itemPlace in ["",None]:
             itemPlace=""
-        # 分類
+
         if itemTypeLevel1 not in ["",None]  and itemTypeLevel2 not in ["",None]:
-            # print("大項細項都有")
 
             itemTypeLevel2_list=[itemTypeLevel2]
 
         if itemTypeLevel1 not in ["",None] and itemTypeLevel2 in ["",None]:
-            # print("只有大項")
+
             itemTypeLevel1_id=[]
             for itemtypelevel1 in ItemTypeLevel1.objects.filter(name=itemTypeLevel1):
                 itemTypeLevel1_id.append(itemtypelevel1.level1Id)
@@ -78,15 +77,13 @@ class ItemViewSet(viewsets.ModelViewSet):
                 itemTypeLevel2_list.append(itemTypeLevel2.name)
 
         if itemTypeLevel1 in ["",None] and itemTypeLevel2 in ["",None]:
-            # print("大項細項都沒有")
+
             itemTypeLevel1_id=[]
             for itemtypelevel1 in ItemTypeLevel1.objects.all():
                 itemTypeLevel1_id.append(itemtypelevel1.level1Id)
             itemTypeLevel2_list=[]
             for itemTypeLevel2 in get_list_or_404(ItemTypeLevel2,level1Id__in=itemTypeLevel1_id):
                 itemTypeLevel2_list.append(itemTypeLevel2.name)
-
-        #時間範圍搜尋
         if startDatetime in ["",None]  :
             startDatetime=datetime.datetime(2019,7,1,1,30)
         if endDatetime in ["",None] :

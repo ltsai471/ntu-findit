@@ -13,7 +13,7 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ('id', 'customer', 'items')
-#filter完後response的資料
+
 class FilterItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item

@@ -32,14 +32,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/', include(itemRouter.urls)),
-    # path('api/main/', include(mainRouter.urls)),
     path('api/test/', views.TestView.as_view(), name='test'),
     path('ntulost/', include('ntulost.urls')),
-    path('', RedirectView.as_view(url='/api/main/')),
-
+    path('', RedirectView.as_view(url='/api/')),
 ]
-# path('api/Item/getItemByID/', views.getItemByID, name='lostitem'),
-#     path('api/Item/getUserLostItem/', views.getUserLostItem, name='userlostitem'),
 
 from django.conf import settings
 from django.conf.urls.static import static
