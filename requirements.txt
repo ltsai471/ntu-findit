@@ -30,3 +30,6 @@ sqlparse==0.4.2
 tzdata==2021.5
 urllib3==1.26.9
 xmlschema==1.10.0
+dj-database-url==0.5.0
+dj-static==0.0.6
+gunicorn==19.9.0
