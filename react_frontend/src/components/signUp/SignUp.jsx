@@ -121,25 +121,24 @@ class SignUp extends React.Component {
                                         type="password"
                                     />
                                 </Grid>
-                                {/* <Grid item xs={12}>
-                                <FormControlLabel
-                                    control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                    label="I want to receive inspiration, marketing promotions and updates via email."
-                                />
-                            </Grid> */}
+                                <Grid item xs={12}>
+                                    <Button
+                                        variant="contained"
+                                        component="label"
+                                        fullWidth
+                                        size="large"
+                                        style={{
+                                            backgroundColor: this.pageColor,
+                                        }}
+                                    >
+                                        註冊
+                                        <input
+                                            type="submit"
+                                            hidden
+                                        />
+                                    </Button>
+                                </Grid>
                             </Grid>
-                            <Button
-                                type="submit"
-                                size="large"
-                                fullWidth
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                                style={{
-                                    backgroundColor: this.pageColor
-                                }}
-                            >
-                                註冊
-                            </Button>
                             <Grid container justifyContent="flex-end">
                                 <Grid item>
                                     <Link href="/" variant="body2">

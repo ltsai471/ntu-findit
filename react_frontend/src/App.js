@@ -15,7 +15,8 @@ import {
     SignUp,
     LostDeclaration,
     MainPage,
-    LostReturn
+    LostReturn,
+    PersonalPage,
 } from "./components";
 
 export default function App() {
@@ -41,8 +42,9 @@ export default function App() {
                     <Route path="/signUp" element={<SignUp pageColor="primary" />} />
                     <Route path="/lostReport" element={<LostDeclaration title="遺失物申報" pageColor="secondary" />} />
                     <Route path="/lostPublish" element={<LostDeclaration title="拾獲案件刊登" pageColor="secondaryLight" />} />
-                    <Route path="/mainpage" element={<MainPage />} />
+                    <Route path="/mainPage" element={<MainPage />} />
                     <Route path="/lostReturn" element={<LostReturn pageColor="secondaryLight" />} />
+                    <Route path="/personalPage" element={<PersonalPage pageColor="primary" />} />
                     {/* <Route path="/applyloss " element={<ApplyLossPage />} />
                     <Route path="/test " element={<TestPage />} /> */}
           {/* <Route path="/order" element={<OrderListContainer />} /> */}

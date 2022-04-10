@@ -9,26 +9,22 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from '../signIn/Copyright';
 import themeColor from '../../config';
 
 const theme = createTheme();
 
-class LostReturn extends React.Component {
+class PersonalPage extends React.Component {
     constructor(props) {
         super(props);
 
         this.pageColor = themeColor[this.props.pageColor];
 
         this.state = {
-            id: "",
-            phone: "",
-            case: "",
+            name: "王小明",
+            email: "r10725000@ntu.edu.tw",
             image: "",
         };
 
@@ -70,7 +66,7 @@ class LostReturn extends React.Component {
                             <AssignmentIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            拾獲物歸還
+                            個人資料修改
                         </Typography>
                         <Box component="form" noValidate onSubmit={this.handleSubmit} sx={{ mt: 3 }}>
                             <Grid container spacing={1}>
@@ -79,11 +75,11 @@ class LostReturn extends React.Component {
                                         margin="dense"
                                         required
                                         fullWidth
-                                        id="id"
-                                        label="遺失主身分證字號"
-                                        name="id"
+                                        id="name"
+                                        label="使用者名稱"
+                                        name="name"
                                         autoFocus
-                                        value={this.state.id}
+                                        value={this.state.name}
                                         onChange={this.handleChange}
                                     />
                                 </Grid>
@@ -92,28 +88,13 @@ class LostReturn extends React.Component {
                                         margin="dense"
                                         required
                                         fullWidth
-                                        id="phone"
-                                        label="遺失主手機號碼"
-                                        name="phone"
-                                        value={this.state.phone}
+                                        id="email"
+                                        label="NTU 信箱"
+                                        name="email"
+                                        autoComplete="email"
+                                        value={this.state.email}
                                         onChange={this.handleChange}
                                     />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <FormControl fullWidth margin="dense">
-                                        <InputLabel>歸還案件</InputLabel>
-                                        <Select
-                                            id="case"
-                                            name="case"
-                                            label="歸還案件"
-                                            value={this.state.case}
-                                            onChange={this.handleChange}
-                                        >
-                                            <MenuItem value="#01">2022-03-14 20:23 水壺 共同101 水壺</MenuItem>
-                                            <MenuItem value="#02">2022-03-12 17:05 手機 總圖 手機(i13)</MenuItem>
-                                            <MenuItem value="#03">2022-03-01 22:42 錢包 管二303 黑色錢包</MenuItem>
-                                        </Select>
-                                    </FormControl>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <FormControl fullWidth margin="dense">
@@ -125,10 +106,8 @@ class LostReturn extends React.Component {
                                             size="large"
                                             style={{ backgroundColor: this.pageColor }}
                                         >
-                                            歸還物品照片
+                                            大頭貼上傳
                                             <input
-                                                id="image"
-                                                name="image"
                                                 type="file"
                                                 value={this.state.image}
                                                 onChange={this.handleChange}
@@ -148,7 +127,7 @@ class LostReturn extends React.Component {
                                                 backgroundColor: this.pageColor,
                                             }}
                                         >
-                                            確認歸還
+                                            送出修改
                                             <input
                                                 type="submit"
                                                 hidden
@@ -166,8 +145,8 @@ class LostReturn extends React.Component {
     }
 }
 
-LostReturn.defaultProps = {
-    pageColor: "secondary"
+PersonalPage.defaultProps = {
+    pageColor: "primary"
 }
 
-export default LostReturn;
+export default PersonalPage;

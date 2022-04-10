@@ -12,4 +12,4 @@ export { default as SignUp } from "./signUp/SignUp";
 export { default as LostDeclaration } from "./lostDeclaration/LostDeclaration";
 export { default as MainPage } from "./mainPage/MainPage";
 export { default as LostReturn } from "./lostReturn/LostReturn";
-
+export { default as PersonalPage } from "./personalPage/PersonalPage";

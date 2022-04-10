@@ -12,7 +12,7 @@ import ResponsiveAppBar from "./ResponsiveAppBar";
 import BasicDateTimePicker from "./BasicDateTimePicker";
 // import GoogleMapPicker from "./GoogleMapPicker";
 import Filter from "./Filter";
-// import GoogleMap from "./GoogleMap";
+import GoogleMap from "./GoogleMap";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -47,7 +47,7 @@ class MainPage extends React.Component {
               </Grid>
               <Grid item xs={12} md={6}>
                 <Item>
-                  {/* <GoogleMap /> */}
+                  <GoogleMap />
                   {/* <Box
                     sx={{
                       width: 600,

@@ -118,16 +118,20 @@ class SignIn extends React.Component {
                                     label="記住密碼"
                                 />
                                 <Button
-                                    type="submit"
-                                    size="large"
-                                    fullWidth
                                     variant="contained"
+                                    component="label"
+                                    fullWidth
+                                    size="large"
                                     sx={{ mt: 3, mb: 2 }}
                                     style={{
-                                        backgroundColor: this.pageColor
+                                        backgroundColor: this.pageColor,
                                     }}
                                 >
                                     登入
+                                    <input
+                                        type="submit"
+                                        hidden
+                                    />
                                 </Button>
                                 <Grid container>
                                     <Grid item xs>
