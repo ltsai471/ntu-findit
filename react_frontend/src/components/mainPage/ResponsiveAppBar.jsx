@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import themeColor from "../../config.js";
 
 import AppBar from "@mui/material/AppBar";
@@ -13,17 +14,28 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { convertLength } from "@mui/material/styles/cssUtils";
 
 const pages = ["聊天室", "刊登拾獲案件", "申報遺失物"];
 const settings = ["個人資料", "Account", "Dashboard", "Logout"];
+const pageRoutes = {
+  聊天室: "/mainpage",
+  刊登拾獲案件: "/lostPublish",
+  申報遺失物: "/lostReport",
+};
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
+  let navigate = useNavigate();
+
   const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
   const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
-  const handleCloseNavMenu = () => setAnchorElNav(null);
+  const onClickRedirect = (path) => {
+    navigate(path);
+    setAnchorElNav(null);
+  };
   const handleCloseUserMenu = () => setAnchorElUser(null);
 
   const AppBarStyle = { backgroundColor: themeColor.primary };
@@ -65,13 +77,16 @@ const ResponsiveAppBar = () => {
                 horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+              // onClose={() => onClickRedirect(pageRoutes[page])}
               sx={{
                 display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={page}
+                  onClick={() => onClickRedirect(pageRoutes[page])}
+                >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -89,7 +104,7 @@ const ResponsiveAppBar = () => {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => onClickRedirect(pageRoutes[page])}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
