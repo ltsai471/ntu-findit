@@ -101,6 +101,7 @@ http://localhost:8000/api/orders/
 (download node.js)
 npm install react
 (cd to NTU_Lost\react_frontend)
+npm install
 npm start
 </code></pre>
 
