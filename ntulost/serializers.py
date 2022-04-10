@@ -1,6 +1,6 @@
 # This code is used to covert data to JSON
 from rest_framework import serializers
-from .models import Order, OrderItem, Item
+from .models import Order, OrderItem, Item, Account
 
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,3 +20,9 @@ class ItemSerializer(serializers.ModelSerializer):
         fields = ('id', 'foundOrLoss', 'status', 'accountId',
          'lossDatetime', 'itemPlace', 'preservePlace', 'itemType',
          'itemDesc', 'img', 'closeDatetime', 'itemOwnerId', 'editDatetime')
+
+
+class AccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ('mailId','pwd','name')

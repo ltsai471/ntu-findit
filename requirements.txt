@@ -18,7 +18,7 @@ idna==3.3
 isodate==0.6.1
 lxml==4.6.5
 Pillow==9.0.1
-psycopg2==2.9.3
+
 pycparser==2.21
 PyJWT==1.7.1
 pyOpenSSL==22.0.0
