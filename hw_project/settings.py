@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 import datetime
 
@@ -86,8 +86,6 @@ DATABASES = {
         'PASSWORD': 'secure1234',
         'HOST': '140.112.106.237',
         'PORT': '16891',
-        # 'HOST': '127.0.0.1',
-        # 'PORT': '5432',
     }
 }
 
@@ -128,8 +126,14 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
+
+#save image
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
