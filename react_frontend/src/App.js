@@ -14,21 +14,21 @@ import {
     SignIn,
     SignUp,
     LostDeclaration,
+    MainPage,
 } from "./components";
 
-
 export default function App() {
-    const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        if (getAuthToken()) {
-            verifyAccount().then((response) => {
-                if (response.token != null) {
-                    setUser(response.token);
-                }
-            });
+  useEffect(() => {
+    if (getAuthToken()) {
+      verifyAccount().then((response) => {
+        if (response.token != null) {
+          setUser(response.token);
         }
-    }, []);
+      });
+    }
+  }, []);
 
     return (
         <AuthContext.Provider value={{ user, setUser }}>
@@ -40,6 +40,7 @@ export default function App() {
                     <Route path="/signUp" element={<SignUp pageColor="primary" />} />
                     <Route path="/lostReport" element={<LostDeclaration title="遺失物申報" pageColor="secondary" />} />
                     <Route path="/lostPublish" element={<LostDeclaration title="遺失物刊登" pageColor="secondaryLight" />} />
+                    <Route path="/mainpage" element={<MainPage />} />
                     {/* <Route path="/applyloss " element={<ApplyLossPage />} />
                     <Route path="/test " element={<TestPage />} /> */}
                     {/* <Route path="/order" element={<OrderListContainer />} /> */}
