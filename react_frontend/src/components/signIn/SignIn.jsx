@@ -48,6 +48,7 @@ class SignIn extends React.Component {
         for (const [key, value] of Object.entries(this.state)) {
             console.log(key, value);
         }
+        window.location.replace("/mainPage/");
         event.preventDefault();
     }
 
