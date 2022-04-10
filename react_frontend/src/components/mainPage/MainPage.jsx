@@ -7,10 +7,12 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 
+import themeColor from "../../config.js";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import BasicDateTimePicker from "./BasicDateTimePicker";
 // import GoogleMapPicker from "./GoogleMapPicker";
 import Filter from "./Filter";
+import GoogleMap from "./GoogleMap";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -31,38 +33,38 @@ class MainPage extends React.Component {
           </Item>
           <Item>
             <Grid container spacing={2}>
-              <Grid item xs={2.5}>
+              <Grid item xs={12} md={3}>
                 <Item>
                   <BasicDateTimePicker />
                 </Item>
                 {/* <Item><GoogleMapPicker /></Item> */}
                 <Item>
-                  <Filter />
+                  <Filter by={"location"} />
                 </Item>
                 <Item>
-                  <Filter />
+                  <Filter by={"itemType"} />
                 </Item>
               </Grid>
-              <Grid item xs={7}>
+              <Grid item xs={12} md={6}>
                 <Item>
-                  Google Map
-                  <Box
+                  <GoogleMap />
+                  {/* <Box
                     sx={{
-                      width: 865,
+                      width: 600,
                       height: 500,
-                      backgroundColor: "primary.dark",
+                      backgroundColor: themeColor.primary,
                       "&:hover": {
-                        backgroundColor: "primary.main",
+                        backgroundColor: themeColor.primaryLight,
                         opacity: [0.9, 0.8, 0.7],
                       },
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
                     }}
-                  />
+                  /> */}
                 </Item>
               </Grid>
-              <Grid item xs={2.5}>
+              <Grid item xs={12} md={3}>
                 <Item>Preview</Item>
               </Grid>
             </Grid>

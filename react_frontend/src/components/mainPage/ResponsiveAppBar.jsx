@@ -1,4 +1,5 @@
 import React from "react";
+import themeColor from "../../config.js";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -25,8 +26,10 @@ const ResponsiveAppBar = () => {
   const handleCloseNavMenu = () => setAnchorElNav(null);
   const handleCloseUserMenu = () => setAnchorElUser(null);
 
+  const AppBarStyle = { backgroundColor: themeColor.primary };
+
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={AppBarStyle}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
