@@ -52,7 +52,7 @@ class LostDeclaration extends React.Component {
         });
     }
 
-    handleTimeChange(dateValue){
+    handleTimeChange(dateValue) {
         this.setState({
             time: dateValue
         });
@@ -82,7 +82,7 @@ class LostDeclaration extends React.Component {
                             <AssignmentIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            { this.title }
+                            {this.title}
                         </Typography>
                         <Box component="form" noValidate onSubmit={this.handleSubmit} sx={{ mt: 3 }}>
                             <Grid container spacing={2}>
@@ -157,19 +157,26 @@ class LostDeclaration extends React.Component {
                                         rows={4}
                                     />
                                 </Grid>
+                                <Grid item xs={12}>
+                                    <FormControl fullWidth>
+                                        <Button
+                                            variant="contained"
+                                            component="label"
+                                            fullWidth
+                                            size="large"
+                                            style={{
+                                                backgroundColor: this.pageColor,
+                                            }}
+                                        >
+                                            送出
+                                            <input
+                                                type="submit"
+                                                hidden
+                                            />
+                                        </Button>
+                                    </FormControl>
+                                </Grid>
                             </Grid>
-                            <Button
-                                variant="contained"
-                                type="submit"
-                                fullWidth
-                                size="large"
-                                sx={{ mt: 3, mb: 2 }}
-                                style={{
-                                    backgroundColor: this.pageColor
-                                }}
-                            >
-                                送出
-                            </Button>
                         </Box>
                     </Box>
                     <Copyright sx={{ mt: 5 }} />
