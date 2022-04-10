@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'orderapp.apps.OrderappConfig',
+    'ntulost.apps.NtuLostConfig',
 ]
 
 MIDDLEWARE = [
@@ -80,11 +81,13 @@ WSGI_APPLICATION = 'hw_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'order_application',
+        'NAME': 'ntu_lost',
         'USER': 'root',
         'PASSWORD': 'secure1234',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'HOST': '140.112.106.237',
+        'PORT': '16891',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '5432',
     }
 }
 
@@ -133,3 +136,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000'
 ]
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticated',
+#     ),
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#         'rest_framework.authentication.BasicAuthentication',
+#     ),
+# }
+
+# JWT_AUTH = {
+#     'JWT_ALGORITHM': 'HS256', # 指定演算法
+#     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=1000), # token 存活時間
+#     'JWT_ALLOW_REFRESH': True, # 是否可以刷新未過期的 token
+#     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7), # 刷新 token 的存活時間
+# }

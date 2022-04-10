@@ -1,11 +1,11 @@
+export { default as LoginPage } from "./LoginPage";
 export { default as Navigation } from "./Navigation";
 export { default as Footer } from "./Footer";
-// export { default as Blog } from "./blog/Blog";
-// export { default as Posts } from "./blog/Posts";
-// export { default as Post } from "./blog/Post";
-// export { default as OrderList } from "./first_page";
 export { default as OrderListContainer } from "./orderList/first_page";
-export { default as SearchBar } from "./orderList/SearchBar";
 export { default as OrderList } from "./orderList/OrderList";
 export { default as OrderRow } from "./orderList/OrderRow";
 export { default as OrderDetail } from "./orderList/second_page";
+export { default as ApplyLossPage } from "./test/ApplyLoss";
+export { default as TestPage } from "./test/test";
+export { default as SignIn } from "./signIn/SignIn";
+export { default as SignUp } from "./signUp/SignUp";

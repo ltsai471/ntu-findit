@@ -1,7 +1,0 @@
-{% extends "base_generic.html" %}
-
-{% block content %}
-  <p><strong>ID:</strong>{{ order.id }}</p>
-  <p><strong>Customer:</strong> {{ order.customer }}</p>
-  <p><strong>Items:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-{% endblock %}

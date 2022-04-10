@@ -18,7 +18,8 @@ from django.urls import path
 from django.conf.urls import include
 from django.views.generic import RedirectView
 from rest_framework import routers
-from orderapp import views
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
+from ntulost import views
 
 router = routers.DefaultRouter()
 router.register(r'orders', views.OrderView, 'order')
@@ -26,8 +27,11 @@ router.register(r'orders', views.OrderView, 'order')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('orderapp/', include('orderapp.urls')),
-    path('', RedirectView.as_view(url='/orderapp/')),
+    path('ntulost/', include('ntulost.urls')),
+    path('', RedirectView.as_view(url='/ntulost/')),
+    # path('api-token-auth/', obtain_jwt_token),
+    # path('api-token-verify/', verify_jwt_token),
+    # path('api-token-refresh/', refresh_jwt_token),
 ]
 
 
