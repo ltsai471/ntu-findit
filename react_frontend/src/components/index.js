@@ -9,3 +9,5 @@ export { default as ApplyLossPage } from "./test/ApplyLoss";
 export { default as TestPage } from "./test/test";
 export { default as SignIn } from "./signIn/SignIn";
 export { default as SignUp } from "./signUp/SignUp";
+export { default as LostDeclaration } from "./lostDeclaration/LostDeclaration";
+export { default as MainPage } from "./mainPage/MainPage";
