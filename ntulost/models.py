@@ -81,7 +81,7 @@ class ItemTypeLevel2(models.Model):
     editDatetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'level1id{self.level1Id}_level2id{self.level2Id}'
+        return f'{self.level1Id}_{self.level2Id}'
 
 
 class Chatroom(models.Model):

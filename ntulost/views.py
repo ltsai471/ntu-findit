@@ -43,14 +43,14 @@ class ItemViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         queryset = Item.objects.all()
-        serializer = ItemSerializer(queryset, many=True)
-        return Response(serializer.data)
+        itemSerializer = ItemSerializer(queryset, many=True)
+        return Response(itemSerializer.data)
 
     def retrieve(self, request, pk=None):
         queryset = Item.objects.all()
         item = get_object_or_404(queryset, pk=pk)
-        serializer = ItemSerializer(item)
-        return Response(serializer.data)
+        itemSerializer = ItemSerializer(item)
+        return Response(itemSerializer.data)
 
     @action(detail=False, methods=['post'], name="filter")
     def itemsFilter(self, request):
@@ -62,21 +62,21 @@ class ItemViewSet(viewsets.ModelViewSet):
         if itemPlace in ["", None]:
             itemPlace = ""
         if itemTypeLevel1 not in ["", None] and itemTypeLevel2 not in ["", None]:
-            itemTypeLevel2_list = [itemTypeLevel2]
+            itemTypeLevel2List = [itemTypeLevel2]
         if itemTypeLevel1 not in ["", None] and itemTypeLevel2 in ["", None]:
-            itemTypeLevel1_id = []
+            itemTypeLevel1Id = []
             for itemtypelevel1 in ItemTypeLevel1.objects.filter(name=itemTypeLevel1):
-                itemTypeLevel1_id.append(itemtypelevel1.level1Id)
-            itemTypeLevel2_list = []
-            for itemTypeLevel2 in get_list_or_404(ItemTypeLevel2, level1Id__in=itemTypeLevel1_id):
-                itemTypeLevel2_list.append(itemTypeLevel2.name)
+                itemTypeLevel1Id.append(itemtypelevel1.level1Id)
+            itemTypeLevel2List = []
+            for itemTypeLevel2 in get_list_or_404(ItemTypeLevel2, level1Id__in=itemTypeLevel1Id):
+                itemTypeLevel2List.append(itemTypeLevel2.name)
         if itemTypeLevel1 in ["", None] and itemTypeLevel2 in ["", None]:
-            itemTypeLevel1_id = []
+            itemTypeLevel1Id = []
             for itemtypelevel1 in ItemTypeLevel1.objects.all():
-                itemTypeLevel1_id.append(itemtypelevel1.level1Id)
-            itemTypeLevel2_list = []
-            for itemTypeLevel2 in get_list_or_404(ItemTypeLevel2, level1Id__in=itemTypeLevel1_id):
-                itemTypeLevel2_list.append(itemTypeLevel2.name)
+                itemTypeLevel1Id.append(itemtypelevel1.level1Id)
+            itemTypeLevel2List = []
+            for itemTypeLevel2 in get_list_or_404(ItemTypeLevel2, level1Id__in=itemTypeLevel1Id):
+                itemTypeLevel2List.append(itemTypeLevel2.name)
         if startDatetime in ["", None]:
             startDatetime = datetime.datetime(2019, 7, 1, 1, 30)
         if endDatetime in ["", None]:
@@ -86,7 +86,7 @@ class ItemViewSet(viewsets.ModelViewSet):
             Item,
             # status="U",
             itemPlace__icontains=itemPlace,
-            itemType__in=itemTypeLevel2_list,
+            itemType__in=itemTypeLevel2List,
             lossDatetime__range=(startDatetime, endDatetime)
         )
 
@@ -103,5 +103,5 @@ class ItemViewSet(viewsets.ModelViewSet):
             Item,
             itemOwnerId=itemOwnerId
         )
-        serializer = ItemSerializer(userLostItem, many=True)
-        return JsonResponse(serializer.data, status=status.HTTP_200_OK, safe=False)
+        itemSerializer = ItemSerializer(userLostItem, many=True)
+        return JsonResponse(itemSerializer.data, status=status.HTTP_200_OK, safe=False)
