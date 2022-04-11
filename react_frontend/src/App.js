@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { getAuthToken } from "./utils";
 import { verifyAccount } from "./webAPI";
 import AuthContext from "./contexts";
+import axios from 'axios';
 import {
     LoginPage,
     Navigation,
@@ -18,6 +19,9 @@ import {
     LostReturn,
     PersonalPage,
 } from "./components";
+
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 export default function App() {
   const [user, setUser] = useState(null);
