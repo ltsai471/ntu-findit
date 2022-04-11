@@ -9,4 +9,3 @@
 /node_modules
 /src/components/blog
 /src/components/blog/*.js
-/staticfiles
