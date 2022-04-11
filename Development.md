@@ -1,8 +1,13 @@
 # Development
 
 ## NOTICE!!
+<<<<<<< HEAD
+- 如果有DB相關的問題一定要跟祐琳講!! (欄位看不懂或不知道要填什麼、欄位增刪、必輸欄位取消、pk自動給號 etc.)
+- 每個功能都要寫測試文件，包含測試的input、output、例外處理等等
+=======
 
 - 如果有 DB 相關的問題一定要跟祐琳講!! (欄位看不懂或不知道要填什麼、欄位增刪、必輸欄位取消、pk 自動給號 etc.)
+>>>>>>> master
 
 ## GIT
 
@@ -13,17 +18,18 @@ git checkout -b "your_branch_name"
 
 - commit branch
 <code><pre>
-git add "file_or_folder"
-git commit -am "commit_name"
+git commit -a -m "commit_name"
 </pre></code>
 
 - if your branch is behind master, merge master to branch
-  <code><pre>
-  git checkout master
-  git pull //solve conflict if needed
-  git checkout "your_branch_name"
-  git merge master
-  </code></pre>
+<code><pre>
+git checkout master
+git pull    //solve conflict if needed
+or
+git pull oringin remote_branch_name    //solve conflict if needed
+git checkout "your_branch_name"
+git merge master
+</code></pre>
 
 - push branch to remote (\*in your branch)
   <code><pre>
@@ -34,22 +40,27 @@ git commit -am "commit_name"
 ## Coding Style
 
 - Use Camel-Case to name all variables
-  - class: use upper-case on the first letter #e.g. Account
-  - attr and function: use lower-case on the first letter #e.g. itemName
+  - class: use upper-case on the first letter  #e.g. Account
+  - attr and function: use lower-case on the first letter  #e.g. itemName
+- 換行:
+  - 兩個class之間或class與function(同層)之間，請空兩行
+  - 同一個class與其下的function之間，請空一行
+  - 如果單行的code會長到需要往右捲動，請換行，以不需要往右捲為準
+- Format hotkey (vscode): `shift+alt+f`
 - Use RESTful API
   - https://ithelp.ithome.com.tw/articles/10194229
 
 ## Install Virtual Environment for Django (for Windows 10 ptrhon 3.9)
 
 1. cmd 輸入
-   <code><pre>
-   (cd 到要裝虛擬環境的目錄 這邊是 C:\Envs)
-   pip install virtualenvwrapper-win
-   python -m venv sdm_venv
-   cd C:\Envs\sdm_venv\Scripts
-   activate
-   (sdm_venv) C:\>python (激活後可以看到前綴有帶 (venv) 的字樣, 可以鍵入 python 試試)
-   </code></pre>
+<code><pre>
+(cd到要裝虛擬環境的目錄 這邊是C:\Envs)
+pip install virtualenvwrapper-win
+python -m venv sdm_venv
+cd C:\Envs\sdm_venv\Scripts
+activate
+(sdm_venv) C:\>python --version (激活後可以看到前綴有帶 (venv) 的字樣, 可以鍵入 python 試試)
+</code></pre>
 
 2. 安裝
    <code><pre>
