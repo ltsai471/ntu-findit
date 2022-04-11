@@ -5,7 +5,7 @@ class GoogleMap extends React.Component {
   render() {
     return (
       <MapContainer
-        center={[51.505, -0.09]}
+        center={[25.016224652153706, 121.53065911378008]}
         zoom={13}
         style={{ height: "80vh", width: "100%" }}
       >
@@ -13,7 +13,7 @@ class GoogleMap extends React.Component {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[51.505, -0.09]}>
+        <Marker position={[25.016224652153706, 121.53065911378008]}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
