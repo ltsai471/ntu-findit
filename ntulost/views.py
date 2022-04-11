@@ -39,7 +39,6 @@ class TestView(View):
 class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
-    # permission_classes = [IsAccountAdminOrReadOnly]
 
     def list(self, request):
         queryset = Item.objects.all()
