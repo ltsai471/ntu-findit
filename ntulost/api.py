@@ -1,8 +1,8 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import OrderSerializer, ItemSerializer
-from .models import Order, Item
+from .serializers import OrderSerializer, ItemSerializer, AccountSerializer
+from .models import Order, Item, Account
 
 
 @api_view(['GET'])
@@ -62,3 +62,28 @@ def item_detail(request, pk):
     elif request.method == 'DELETE':
         item.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['POST'])
+def login(request):
+    if request.method == 'POST':
+        mailId = request.data['mailId']
+        pwd = request.data['pwd']
+        try:
+            account = Account.objects.get(mailId=mailId)
+        except Account.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        return Response({'msg':pwd == account.pwd})
+
+
+@api_view(['POST'])
+def signup(request):
+    if request.method == 'POST':
+        mailId = request.data['mailId']
+        name = request.data['name']
+        pwd = request.data['pwd']
+        accountSerializer = AccountSerializer(data=request.data)
+        if accountSerializer.is_valid():
+            accountSerializer.save()
+        return Response(accountSerializer.data)
