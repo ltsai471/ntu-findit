@@ -118,8 +118,12 @@ http://localhost:8000/api/orders/
 (download node.js)
 npm install react
 (cd to NTU_Lost\react_frontend)
-(To get the latest node_modules, run: npm install)
+(To get the latest node_modules)
+npm install
+(run react.js app)
 npm start
+(build react app to get /build )
+npm run build
 </code></pre>
 
 ## Migrate model to your PostgreSQL
