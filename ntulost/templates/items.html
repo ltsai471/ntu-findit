@@ -1,0 +1,11 @@
+<html><body>
+    <h1>items</h1>
+    <ul>
+        {% for item in items %}
+        <li>{{ item.name }}</li>
+        <text>{{item.itemType}}</text><br>
+        {% comment %} <text>{{profile.img.url}}</text><br> {% endcomment %}
+        <img src="{{ item.img.url}}" alt='{{item.itemType}}'}></img><br>
+        {% endfor %}
+    </ul>
+    </body></html>
