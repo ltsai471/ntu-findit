@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath hw_project hw_project.wsgi --log-file -
+web: npm start --log-file -
