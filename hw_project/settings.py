@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-dx-y5%6&4@q6l0shdl026j870z0+1p-$n(_i_^0&4syk@2a7n8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ntulost.herokuapp.com', '127.0.0.1:8000', 'localhost']
+ALLOWED_HOSTS = ['ntulost.herokuapp.com', '127.0.0.1:8000', 'localhost', '127.0.0.1']
 
 
 # Application definition
