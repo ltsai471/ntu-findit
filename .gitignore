@@ -5,3 +5,8 @@
 /react_frontend/src/components/blog
 /react_frontend/src/components/blog/*.js
 .DS_Store
+
+/node_modules
+/src/components/blog
+/src/components/blog/*.js
+/hw_project/_pycache_
