@@ -83,7 +83,7 @@ def signup(request):
         mailId = request.data['mailId']
         name = request.data['name']
         pwd = request.data['pwd']
-        serializer = AccountSerializer(data=request.data)
+        accountSerializer = AccountSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
         return Response(serializer.data)
