@@ -3,6 +3,7 @@ from rest_framework import serializers
 from .models import Order, OrderItem, Item, Account
 
 
+
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
@@ -20,7 +21,7 @@ class OrderSerializer(serializers.ModelSerializer):
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
-<<<<<<< HEAD
+
         fields = ('id', 'foundOrLoss', 'status', 'accountId',
          'lossDatetime', 'itemPlace', 'preservePlace', 'itemType',
          'itemDesc', 'img', 'closeDatetime', 'itemOwnerId', 'editDatetime')
@@ -30,7 +31,7 @@ class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = ('mailId','pwd','name')
-=======
+
         fields = ("id", "foundOrLoss", "status", "accountId",
                   "lossDatetime", "itemPlace", "preservePlace", "itemType",
                   "itemDesc", "img", "closeDatetime", "itemOwnerId", "editDatetime")
@@ -41,4 +42,4 @@ class FilterItemSerializer(serializers.ModelSerializer):
         model = Item
         fields = ('id', "lossDatetime", "preservePlace",
                   'status', "itemPlace", "itemType", "img")
->>>>>>> master
+
