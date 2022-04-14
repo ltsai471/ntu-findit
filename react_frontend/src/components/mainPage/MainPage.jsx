@@ -34,34 +34,19 @@ class MainPage extends React.Component {
           <Item>
             <Grid container spacing={2}>
               <Grid item xs={12} md={3}>
-                <Item>
+                <>
                   <BasicDateTimePicker />
-                </Item>
-                {/* <Item><GoogleMapPicker /></Item> */}
-                <Item>
+                </>
+                <>
                   <Filter by={"location"} />
-                </Item>
-                <Item>
+                </>
+                <>
                   <Filter by={"itemType"} />
-                </Item>
+                </>
               </Grid>
               <Grid item xs={12} md={6}>
                 <Item>
                   <GoogleMap />
-                  {/* <Box
-                    sx={{
-                      width: 600,
-                      height: 500,
-                      backgroundColor: themeColor.primary,
-                      "&:hover": {
-                        backgroundColor: themeColor.primaryLight,
-                        opacity: [0.9, 0.8, 0.7],
-                      },
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  /> */}
                 </Item>
               </Grid>
               <Grid item xs={12} md={3}>

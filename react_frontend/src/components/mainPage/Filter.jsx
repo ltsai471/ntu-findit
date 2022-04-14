@@ -30,17 +30,16 @@ const filterTypeConfig = {
 
 const Filter = ({ by }) => {
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", marginTop: "10px" }}>
       <h5>{filterTypeConfig[by].titleText}</h5>
       <Autocomplete
         disablePortal
         id="combo-box-demo"
         options={filterTypeConfig[by].options}
-        sx={{ width: "80%", ml: "8%", mr: "8%" }}
-        renderInput={(params) => {
-          console.log(params);
+        sx={{ width: "70%", ml: "15%", mr: "15%" }}
+        renderInput={(props) => {
           return (
-            <TextField {...params} label={filterTypeConfig[by].fieldText} />
+            <TextField {...props} label={filterTypeConfig[by].fieldText} />
           );
         }}
       />
