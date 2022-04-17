@@ -19,7 +19,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import Copyright from '../signIn/Copyright';
 import themeColor from '../../config';
-import axios, { post } from 'axios';
+// import axios, { post } from 'axios';
 
 const theme = createTheme();
 
@@ -59,37 +59,66 @@ class LostDeclaration extends React.Component {
         });
     }
 
-    handleFileChange(event) {
+    async handleFileChange(event) {
         const target = event.target;
-        const value = target.files[0];
+        const file = target.files[0];
         const name = target.name;
+        const arrayBuffer = await this.getArrayBuffer(file);
         this.setState({
-            [name]: value
+            [name]: arrayBuffer
         });
+        console.log(this.state.image);
+    }
+
+    getArrayBuffer(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+                resolve(reader.result);
+            });
+            reader.readAsArrayBuffer(file);
+        })
     }
 
 
     handleSubmit(event) {
-        event.preventDefault();
-        const url = 'http://localhost:5000/';  // Should be changed to API url 
-        const formData = new FormData();
-        for (const [key, value] of Object.entries(this.state)) {
-            console.log(key, value);
-            formData.append(key, value);
-        }
-        const config = {
+        // event.preventDefault();
+        // const url = 'http://localhost:5000/';  // Should be changed to API url 
+        // const formData = new FormData();
+        // for (const [key, value] of Object.entries(this.state)) {
+        //     console.log(key, value);
+        //     formData.append(key, value);
+        // }
+        // const config = {
+        //     headers: {
+        //         'content-type': 'multipart/form-data'
+        //     },
+        // }
+        // axios.post(url, formData, config)
+        //     .then(response => {
+        //         console.log(response);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     });
+        return fetch('http://localhost:5000', {
             headers: {
-                'content-type': 'multipart/form-data'
+                "content-type": "application/json"
             },
-        }
-        axios.post(url, formData, config)
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+            method: 'POST',
+            body: JSON.stringify({
+                time: this.state.time,
+                location: this.state.location,
+                category: this.state.category,
+                description: this.state.description,
+                image: Array.from(new Uint8Array(this.state.image)),
+            }),
+        }).then((res) => {
+            console.log(res);
+        })
+            .catch(err => console.log('err', err))
     }
+
 
     render() {
         return (
