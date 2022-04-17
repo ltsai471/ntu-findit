@@ -19,6 +19,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import Copyright from '../signIn/Copyright';
 import themeColor from '../../config';
+import axios, { post } from 'axios';
 
 const theme = createTheme();
 
@@ -34,19 +35,19 @@ class LostDeclaration extends React.Component {
             location: "",
             category: "",
             description: "",
-            image: "",
+            image: null,
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleTimeChange = this.handleTimeChange.bind(this);
+        this.handleFileChange = this.handleFileChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-
         this.setState({
             [name]: value
         });
@@ -58,11 +59,36 @@ class LostDeclaration extends React.Component {
         });
     }
 
+    handleFileChange(event) {
+        const target = event.target;
+        const value = target.files[0];
+        const name = target.name;
+        this.setState({
+            [name]: value
+        });
+    }
+
+
     handleSubmit(event) {
+        event.preventDefault();
+        const url = 'http://localhost:5000/';  // Should be changed to API url 
+        const formData = new FormData();
         for (const [key, value] of Object.entries(this.state)) {
             console.log(key, value);
+            formData.append(key, value);
         }
-        event.preventDefault();
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            },
+        }
+        axios.post(url, formData, config)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     render() {
@@ -109,8 +135,8 @@ class LostDeclaration extends React.Component {
                                         照片上傳
                                         <input
                                             type="file"
-                                            value={this.state.image}
-                                            onChange={this.handleChange}
+                                            name="image"
+                                            onChange={this.handleFileChange}
                                             hidden
                                         />
                                     </Button>
@@ -149,6 +175,7 @@ class LostDeclaration extends React.Component {
                                 <Grid item xs={12}>
                                     <TextField
                                         name="description"
+                                        value={this.state.description}
                                         onChange={this.handleChange}
                                         id="outlined-multiline-static"
                                         label="物品描述"
