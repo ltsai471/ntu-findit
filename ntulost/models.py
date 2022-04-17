@@ -28,7 +28,7 @@ class Account(models.Model):
     mailId = models.CharField(max_length=200, primary_key=True)
     name = models.CharField(max_length=10)
     pwd = models.CharField(max_length=200)
-    photoPath = models.CharField(max_length=200, null=True)
+    photo = models.ImageField(upload_to='images', blank=True, null=True)
     confirmFlag = models.CharField(max_length=1, blank=True, null=True)
     lastLogTime = models.DateTimeField(blank=True, null=True)
     editDatetime = models.DateTimeField(auto_now_add=True)
@@ -52,7 +52,7 @@ class Item(models.Model):
     preservePlace = models.CharField(max_length=200, null=True)
     itemType = models.CharField(max_length=200, null=True)
     itemDesc = models.CharField(max_length=1000, null=True)
-    imgPath = models.CharField(max_length=200, null=True)
+    img = models.ImageField(upload_to='images', null=True)
     closeDatetime = models.DateTimeField(blank=True, null=True)
     itemOwnerId = models.CharField(max_length=200, blank=True, null=True)
     editDatetime = models.DateTimeField(auto_now_add=True)
@@ -102,7 +102,7 @@ class ChatContext(models.Model):
     seq = models.IntegerField(primary_key=True)
     sendAccount = models.CharField(max_length=200, null=True)
     context = models.CharField(max_length=200, null=True)
-    sendDatetime = models.DateTimeField(auto_now_add=True)
+    sendDatetime = models.DateTimeField(null=True)
 
     def __str__(self):
         return f'{self.chatroom_id}_{self.seq}'
@@ -111,7 +111,7 @@ class ChatContext(models.Model):
 class PreservePlace(models.Model):
     name = models.CharField(max_length=20)
     phoneNumber = models.CharField(max_length=20, null=True)
-    imgPath = models.CharField(max_length=200, null=True)
+    img = models.ImageField(upload_to='images', null=True)
     address = models.CharField(max_length=200, null=True)
 
     def __str__(self):
