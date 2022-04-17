@@ -28,7 +28,7 @@ class Account(models.Model):
     mailId = models.CharField(max_length=200, primary_key=True)
     name = models.CharField(max_length=10)
     pwd = models.CharField(max_length=200)
-    photo = models.ImageField(upload_to='images', blank=True, null=True)
+    photoPath = models.CharField(max_length=200, null=True)
     confirmFlag = models.CharField(max_length=1, blank=True, null=True)
     lastLogTime = models.DateTimeField(blank=True, null=True)
     editDatetime = models.DateTimeField(auto_now_add=True)
@@ -52,7 +52,7 @@ class Item(models.Model):
     preservePlace = models.CharField(max_length=200, null=True)
     itemType = models.CharField(max_length=200, null=True)
     itemDesc = models.CharField(max_length=1000, null=True)
-    img = models.ImageField(upload_to='images', null=True)
+    imgPath = models.CharField(max_length=200, null=True)
     closeDatetime = models.DateTimeField(blank=True, null=True)
     itemOwnerId = models.CharField(max_length=200, blank=True, null=True)
     editDatetime = models.DateTimeField(auto_now_add=True)
@@ -111,8 +111,17 @@ class ChatContext(models.Model):
 class PreservePlace(models.Model):
     name = models.CharField(max_length=20)
     phoneNumber = models.CharField(max_length=20, null=True)
-    img = models.ImageField(upload_to='images', null=True)
+    imgPath = models.CharField(max_length=200, null=True)
     address = models.CharField(max_length=200, null=True)
+
+    def __str__(self):
+        return f'{self.name}({self.id})'
+
+
+class ItemPlace(models.Model):
+    name = models.CharField(max_length=20)
+    longitude = models.DecimalField(max_digits=12, decimal_places=6, null=True)
+    latitude = models.DecimalField(max_digits=12, decimal_places=6, null=True)
 
     def __str__(self):
         return f'{self.name}({self.id})'
