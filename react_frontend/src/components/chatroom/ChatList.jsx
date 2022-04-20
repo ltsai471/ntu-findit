@@ -1,16 +1,28 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
+// import Grid from "@mui/material/Grid";
+// import ChatItem from "./ChatItem";
+
+// export default function ChatList() {
+//     return (
+//         <Grid container spacing={2}>
+//             <Grid item xs={12} md={12}>
+//                 <span>Messager</span>
+//             </Grid>
+//             <Grid item xs={12} md={12}>
+//                 <ChatItem />
+//             </Grid>
+//         </Grid>
+//     );
+// }
+import * as React from 'react';
+import List from '@mui/material/List';
 import ChatItem from "./ChatItem";
+
 
 export default function ChatList() {
     return (
-        <div className="chat-app_left">
-            <div className="heading">
-                <h3 className="messenger-title">Messager</h3>
-            </div>
-            <div className="thread-list">
-                <ChatItem />
-            </div>
-        </div>
+        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+            <ChatItem />
+        </List>
     );
-
 }

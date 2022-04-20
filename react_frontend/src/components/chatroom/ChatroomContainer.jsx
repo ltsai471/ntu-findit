@@ -1,69 +1,7 @@
-// import React from "react";
-// import Container from "@mui/material/Container";
-// import CssBaseline from "@mui/material/CssBaseline";
-// import { styled } from "@mui/material/styles";
-// import Stack from "@mui/material/Stack";
-// import Box from "@mui/material/Box";
-// import Paper from "@mui/material/Paper";
-// import Grid from "@mui/material/Grid";
-
-// import themeColor from "../../config.js";
-// import ResponsiveAppBar from "./ResponsiveAppBar";
-// import BasicDateTimePicker from "./BasicDateTimePicker";
-// // import GoogleMapPicker from "./GoogleMapPicker";
-// import Filter from "./Filter";
-// import GoogleMap from "./GoogleMap";
-
-// const Item = styled(Paper)(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-//   ...theme.typography.body2,
-//   padding: theme.spacing(1),
-//   textAlign: "center",
-//   color: theme.palette.text.secondary,
-// }));
-
-// class MainPage extends React.Component {
-//   render() {
-//     return (
-//       <React.Fragment>
-//         <CssBaseline />
-//         <Box sx={{ width: "100%" }}>
-//           <Item>
-//             <ResponsiveAppBar />
-//           </Item>
-//           <Item>
-//             <Grid container spacing={2}>
-//               <Grid item xs={12} md={3}>
-//                 <>
-//                   <BasicDateTimePicker />
-//                 </>
-//                 <>
-//                   <Filter by={"location"} />
-//                 </>
-//                 <>
-//                   <Filter by={"itemType"} />
-//                 </>
-//               </Grid>
-//               <Grid item xs={12} md={6}>
-//                 <Item>
-//                   <GoogleMap />
-//                 </Item>
-//               </Grid>
-//               <Grid item xs={12} md={3}>
-//                 <Item>Preview</Item>
-//               </Grid>
-//             </Grid>
-//           </Item>
-//         </Box>
-//       </React.Fragment>
-//     );
-//   }
-// }
-
-// export default MainPage;
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ChatList from "./ChatList";
 import MessageWindow from "./MessageWindow";
+import Grid from "@mui/material/Grid";
 
 export default function ChatroomContainer() {
     const [loading, setLoading] = useState(true);
@@ -75,12 +13,19 @@ export default function ChatroomContainer() {
     //     setOrders(result);
     //   });
     // };
+    const divStyle = {
+        height: '100vh',
+    };
 
     return (
-        <div className="chat-app clearfix">
-            <ChatList />
+        <Grid container spacing={2}>
+            <Grid item xs={12} md={3} style={divStyle}>
+                <ChatList />
+            </Grid>
             {/* <MessageList orders={orders} /> */}
-            <MessageWindow />
-        </div>
+            <Grid item xs={12} md={9} style={divStyle}>
+                <MessageWindow />
+            </Grid>
+        </Grid>
     );
 }

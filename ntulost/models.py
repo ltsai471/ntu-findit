@@ -32,7 +32,7 @@ class Account(models.Model):
     confirmFlag = models.CharField(max_length=1, blank=True, null=True)
     lastLogTime = models.DateTimeField(blank=True, null=True)
     editDatetime = models.DateTimeField(auto_now_add=True)
-    phoneNumber = models.CharField(max_length=20, null=True)
+    phoneNumber = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
         return self.name
