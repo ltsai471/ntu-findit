@@ -18,6 +18,7 @@ import {
     MainPage,
     LostReturn,
     PersonalPage,
+    ChatroomContainer,
 } from "./components";
 
 axios.defaults.xsrfCookieName = 'csrftoken'
@@ -49,6 +50,7 @@ export default function App() {
                     <Route path="/mainPage" element={<MainPage />} />
                     <Route path="/lostReturn" element={<LostReturn pageColor="secondaryLight" />} />
                     <Route path="/personalPage" element={<PersonalPage pageColor="primary" />} />
+                    <Route path="/chatroom" element={<ChatroomContainer pageColor="primary" />} />
                     {/* <Route path="/applyloss " element={<ApplyLossPage />} />
                     <Route path="/test " element={<TestPage />} /> */}
           {/* <Route path="/order" element={<OrderListContainer />} /> */}

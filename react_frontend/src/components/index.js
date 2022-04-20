@@ -13,3 +13,4 @@ export { default as LostDeclaration } from "./lostDeclaration/LostDeclaration";
 export { default as MainPage } from "./mainPage/MainPage";
 export { default as LostReturn } from "./lostReturn/LostReturn";
 export { default as PersonalPage } from "./personalPage/PersonalPage";
+export { default as ChatroomContainer } from "./chatroom/ChatroomContainer";
