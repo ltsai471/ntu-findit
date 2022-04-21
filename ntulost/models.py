@@ -132,7 +132,7 @@ class ItemPair(models.Model):
         unique_together = (('foundItemId', 'lossItemId'),)
 
     foundItemId = models.ForeignKey(
-        'Item', related_name='foundId', on_delete=models.SET_NULL, null=True)
+        'Item', related_name='foundId', on_delete=models.CASCADE, null=True)
     lossItemId = models.IntegerField(primary_key=True)
 
     def __str__(self):
