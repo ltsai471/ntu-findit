@@ -9,7 +9,11 @@ export default function MessageWindow() {
     const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState([]);
     const divStyle = {
-        'background-color': 'WhiteSmoke',
+        // 'background-color': 'WhiteSmoke',
+        'border-width':'1px',
+        'border-style':'solid',
+        'border-color':'#E5E7E9',
+        padding:'5px',
         height: '100vh',
     };
 
