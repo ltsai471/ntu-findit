@@ -102,7 +102,7 @@ class ChatContext(models.Model):
     seq = models.IntegerField(primary_key=True)
     sendAccount = models.CharField(max_length=200, null=True)
     context = models.CharField(max_length=200, null=True)
-    sendDatetime = models.DateTimeField(auto_now_add=True)
+    sendDatetime = models.DateTimeField(null=True)
 
     def __str__(self):
         return f'{self.chatroom_id}_{self.seq}'
@@ -126,7 +126,7 @@ class ItemPlace(models.Model):
     def __str__(self):
         return f'{self.name}({self.id})'
 
-        
+
 class ItemPair(models.Model):
     class Meta:
         unique_together = (('foundItemId', 'lossItemId'),)
