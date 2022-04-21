@@ -32,7 +32,7 @@ class Account(models.Model):
     confirmFlag = models.CharField(max_length=1, blank=True, null=True)
     lastLogTime = models.DateTimeField(blank=True, null=True)
     editDatetime = models.DateTimeField(auto_now_add=True)
-    phoneNumber = models.CharField(max_length=20, null=True)
+    phoneNumber = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -102,7 +102,7 @@ class ChatContext(models.Model):
     seq = models.IntegerField(primary_key=True)
     sendAccount = models.CharField(max_length=200, null=True)
     context = models.CharField(max_length=200, null=True)
-    sendDatetime = models.DateTimeField(null=True)
+    sendDatetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.chatroom_id}_{self.seq}'
@@ -125,3 +125,15 @@ class ItemPlace(models.Model):
 
     def __str__(self):
         return f'{self.name}({self.id})'
+
+        
+class ItemPair(models.Model):
+    class Meta:
+        unique_together = (('foundItemId', 'lossItemId'),)
+
+    foundItemId = models.ForeignKey(
+        'Item', related_name='foundId', on_delete=models.SET_NULL, null=True)
+    lossItemId = models.IntegerField(primary_key=True)
+
+    def __str__(self):
+        return f'{self.foundItemId}_{self.lossItemId}'
