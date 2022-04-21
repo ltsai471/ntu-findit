@@ -94,12 +94,8 @@ class Chatroom(models.Model):
 
 
 class ChatContext(models.Model):
-    class Meta:
-        unique_together = (('chatroom', 'seq'),)
-
-    chatroom = models.ForeignKey(
-        'Chatroom', related_name='contexts', on_delete=models.SET_NULL, null=True)
-    seq = models.IntegerField(primary_key=True)
+    chatroomId = models.ForeignKey(
+        'Chatroom', related_name='contexts', on_delete=models.CASCADE)
     sendAccount = models.CharField(max_length=200, null=True)
     context = models.CharField(max_length=200, null=True)
     sendDatetime = models.DateTimeField(null=True)
@@ -132,8 +128,9 @@ class ItemPair(models.Model):
         unique_together = (('foundItemId', 'lossItemId'),)
 
     foundItemId = models.ForeignKey(
-        'Item', related_name='foundId', on_delete=models.CASCADE, null=True)
-    lossItemId = models.IntegerField(primary_key=True)
+        'Item', related_name='foundId', on_delete=models.CASCADE)
+    lossItemId = models.ForeignKey(
+        'Item', related_name='lossId', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.foundItemId}_{self.lossItemId}'
