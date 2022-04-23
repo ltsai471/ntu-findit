@@ -1,13 +1,15 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
-from rest_framework import viewsets, status, renderers
-# from rest_framework.renderers import JSONRenderer,TemplateHTMLRenderer
-from rest_framework.decorators import api_view, action
-from rest_framework.response import Response
-from .serializers import OrderSerializer, FilterItemSerializer, ItemSerializer
-from .models import Order, Item, ItemTypeLevel2, ItemTypeLevel1
 from django.views import View
 from django.http import JsonResponse, Http404
-import datetime
+
+from rest_framework import viewsets, status, renderers
+from rest_framework.decorators import api_view, action
+from rest_framework.response import Response
+
+from .serializers import OrderSerializer, FilterItemSerializer, ItemSerializer
+from .models import Order, Item, ItemTypeLevel2, ItemTypeLevel1
+from . import itemFilterUtils
+
 
 
 @api_view(['GET'])
@@ -51,56 +53,49 @@ class ItemViewSet(viewsets.ModelViewSet):
         itemSerializer = ItemSerializer(item)
         return Response(itemSerializer.data)
 
+    # 主頁面
     @action(detail=False, methods=['post'], name="filter")
     def itemsFilter(self, request):
-        itemPlace = request.data.get("itemPlace")
-        itemTypeLevel1 = request.data.get("itemTypeLevel1")
-        itemTypeLevel2 = request.data.get("itemTypeLevel2")
-        startDatetime = request.data.get("startDatetime")
-        endDatetime = request.data.get("endDatetime")
-        if itemPlace in ["", None]:
-            itemPlace = ""
-        if itemTypeLevel1 not in ["", None] and itemTypeLevel2 not in ["", None]:
-            itemTypeLevel2List = [itemTypeLevel2]
-        if itemTypeLevel1 not in ["", None] and itemTypeLevel2 in ["", None]:
-            itemTypeLevel1Id = []
-            for itemtypelevel1 in ItemTypeLevel1.objects.filter(name=itemTypeLevel1):
-                itemTypeLevel1Id.append(itemtypelevel1.level1Id)
-            itemTypeLevel2List = []
-            for itemTypeLevel2 in get_list_or_404(ItemTypeLevel2, level1Id__in=itemTypeLevel1Id):
-                itemTypeLevel2List.append(itemTypeLevel2.name)
-        if itemTypeLevel1 in ["", None] and itemTypeLevel2 in ["", None]:
-            itemTypeLevel1Id = []
-            for itemtypelevel1 in ItemTypeLevel1.objects.all():
-                itemTypeLevel1Id.append(itemtypelevel1.level1Id)
-            itemTypeLevel2List = []
-            for itemTypeLevel2 in get_list_or_404(ItemTypeLevel2, level1Id__in=itemTypeLevel1Id):
-                itemTypeLevel2List.append(itemTypeLevel2.name)
-        if startDatetime in ["", None]:
-            startDatetime = datetime.datetime(2019, 7, 1, 1, 30)
-        if endDatetime in ["", None]:
-            endDatetime = datetime.datetime(2022, 7, 1, 1, 30)
+        itemPlace = itemFilterUtils.getItemPlace(request)
+        itemTypeList = itemFilterUtils.getItemTypeList(request)
+        lossDatetimeRange = itemFilterUtils.getDatetimeRange(request)
 
         filteredItem = get_list_or_404(
             Item,
-            # status="U",
+            foundOrLoss="found",
             itemPlace__icontains=itemPlace,
-            itemType__in=itemTypeLevel2List,
-            lossDatetime__range=(startDatetime, endDatetime)
+            itemType__in=itemTypeList,
+            lossDatetime__range=lossDatetimeRange
         )
 
-        serializer = FilterItemSerializer(filteredItem, many=True)
-        if serializer != None:
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED, safe=False)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST, safe=False)
+        filterItemSerializer = FilterItemSerializer(filteredItem, many=True)
+        if filterItemSerializer != None:
+            return Response(filterItemSerializer.data, status=status.HTTP_201_CREATED)
+        return Response(filterItemSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # 根據使用者主頁面中你的遺失物資料
+    # 你的遺失物
     @action(detail=False, methods=['get'], name="getlostitem by itemOwnerId")
-    def getUserLostItem(self, request):
-        itemOwnerId = request.query_params.get("itemOwnerId")
-        userLostItem = get_list_or_404(
+    def getUserLossItem(self, request):
+        userId = "1"#jwt("mailId")
+
+        userLossItem = get_list_or_404(
             Item,
-            itemOwnerId=itemOwnerId
+            accountId=userId,
+            foundOrLoss="loss"
         )
-        itemSerializer = ItemSerializer(userLostItem, many=True)
-        return JsonResponse(itemSerializer.data, status=status.HTTP_200_OK, safe=False)
+        itemSerializer = ItemSerializer(userLossItem, many=True)
+        return Response(itemSerializer.data, status=status.HTTP_200_OK)
+
+    
+    # 你的拾獲案件
+    @action(detail=False, methods=['get'], name="getlostitem by itemOwnerId")
+    def getUserFoundItem(self, request):
+        userId = "1"#jwt("mailId")
+
+        userFoundItem = get_list_or_404(
+            Item,
+            accountId=userId,
+            foundOrLoss="loss"
+        )
+        itemSerializer = ItemSerializer(userFoundItem, many=True)
+        return Response(itemSerializer.data, status=status.HTTP_200_OK)

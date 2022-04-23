@@ -87,3 +87,15 @@ def signup(request):
         if accountSerializer.is_valid():
             accountSerializer.save()
         return Response(accountSerializer.data)
+
+
+@api_view(['POST'])
+def userLossItem(request):
+    if request.method == 'POST':
+        mailId = request.data['mailId']
+        lossItems = Item.objects.filter(accountId=mailId).exclude
+        foundItems = Item.objects.filter(itemOwnerId=mailId)
+        # pairItems
+        
+        itemSerializer = ItemSerializer(item)
+        return Response(itemSerializer.data)
