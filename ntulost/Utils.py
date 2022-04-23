@@ -1,5 +1,5 @@
 from django.shortcuts import get_list_or_404
-from .models import ItemTypeLevel1, ItemTypeLevel2
+from .models import ItemTypeLevel1, ItemTypeLevel2, ItemPair
 import datetime
 
 def getItemPlace(request):
@@ -43,3 +43,9 @@ def getItemStatus(request):
 
 def getUserId(request):
     return "1"#jwt("mailId")
+
+def getItemPairList(itemId):
+    itemPairList = []
+    for itemPair in ItemPair.objects.filter(lossItemId=itemId).values("foundItemId"):
+        itemPairList.append(itemPair['foundItemId'])
+    return itemPairList

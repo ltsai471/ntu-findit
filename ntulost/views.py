@@ -74,7 +74,7 @@ class ItemViewSet(viewsets.ModelViewSet):
         return Response(filterItemSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # 你的遺失物
-    @action(detail=False, methods=['get'], name="user lost item")
+    @action(detail=False, methods=['get'], name="user loss item")
     def userLossItem(self, request):
         userId = Utils.getUserId(request)
         userLossItem = get_list_or_404(
@@ -83,7 +83,23 @@ class ItemViewSet(viewsets.ModelViewSet):
             foundOrLoss="loss"
         )
         filterItemSerializer = FilterItemSerializer(userLossItem, many=True)
-        return Response(filterItemSerializer.data, status=status.HTTP_200_OK)
+        if filterItemSerializer != None:
+            return Response(filterItemSerializer.data, status=status.HTTP_201_CREATED)
+        return Response(filterItemSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    # 遺失物自動配對
+    @action(detail=False, methods=['get'], name="loss item pair")
+    def lossItemPair(self, request):
+        itemId = request.query_params.get('itemId')
+        itemPairList = Utils.getItemPairList(itemId)
+        lossItemPairs = get_list_or_404(
+            Item,
+            id__in=itemPairList
+        )
+        filterItemSerializer = FilterItemSerializer(lossItemPairs, many=True)
+        if filterItemSerializer != None:
+            return Response(filterItemSerializer.data, status=status.HTTP_201_CREATED)
+        return Response(filterItemSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     # 你的拾獲案件
     @action(detail=False, methods=['get', 'post'], name="user found item")
@@ -96,10 +112,11 @@ class ItemViewSet(viewsets.ModelViewSet):
                 foundOrLoss="found"
             )
             filterItemSerializer = FilterItemSerializer(userFoundItem, many=True)
-            return Response(filterItemSerializer.data, status=status.HTTP_200_OK)
+            if filterItemSerializer != None:
+                return Response(filterItemSerializer.data, status=status.HTTP_201_CREATED)
+            return Response(filterItemSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         elif request.method == 'POST':
-            print("post")
             userId = Utils.getUserId(request)
             itemStatus = Utils.getItemStatus(request)
             itemPlace = Utils.getItemPlace(request)
