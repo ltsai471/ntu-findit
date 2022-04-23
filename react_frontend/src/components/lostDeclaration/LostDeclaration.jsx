@@ -83,7 +83,7 @@ class LostDeclaration extends React.Component {
 
     handleSubmit(event) {
         // event.preventDefault();
-        // const url = 'http://localhost:5000/';  // Should be changed to API url 
+        // const url = 'http://localhost:5000/';  // Should be changed to API url
         // const formData = new FormData();
         // for (const [key, value] of Object.entries(this.state)) {
         //     console.log(key, value);
@@ -101,16 +101,21 @@ class LostDeclaration extends React.Component {
         //     .catch(error => {
         //         console.log(error);
         //     });
-        return fetch('http://localhost:5000', {
+        // http://localhost:5000
+        return fetch('http://localhost:8000/ntulost/item/', {
+            method: 'POST',
             headers: {
                 "content-type": "application/json"
             },
-            method: 'POST',
             body: JSON.stringify({
-                time: this.state.time,
-                location: this.state.location,
-                category: this.state.category,
-                description: this.state.description,
+                foundOrLoss: "loss",
+                status: "U",
+                accountId: "abc@temp.com",
+                lossDatetime: this.state.time,
+                itemPlace: this.state.location,
+                preservePlace: this.state.location,
+                itemType: this.state.category,
+                itemDesc: this.state.description,
                 image: Array.from(new Uint8Array(this.state.image)),
             }),
         }).then((res) => {
