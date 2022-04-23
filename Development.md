@@ -129,16 +129,14 @@ python manage.py makemigrations ntulost
 python manage.py migrate
 </code></pre>
 
-## Convert *Uint8Array Image* to *JPEG Image* from JSON Request
+## Convert *Uint8Array* to *JPEG* Image from JSON Request
 
 <code><pre>
 import cv2
 import numpy as np
 from PIL import Image
-
 data = request.json
 imageArray = data["image"]
-
 imgBGR = cv2.imdecode(np.array(imageArray, dtype=np.uint8),
                        cv2.IMREAD_COLOR)
 imgRGB = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2RGB)
