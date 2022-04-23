@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 from .serializers import OrderSerializer, FilterItemSerializer, ItemSerializer
 from .models import Order, Item, ItemTypeLevel2, ItemTypeLevel1
-from . import itemFilterUtils
+from . import Utils
 
 
 
@@ -56,9 +56,9 @@ class ItemViewSet(viewsets.ModelViewSet):
     # 主頁面
     @action(detail=False, methods=['post'], name="filter")
     def itemsFilter(self, request):
-        itemPlace = itemFilterUtils.getItemPlace(request)
-        itemTypeList = itemFilterUtils.getItemTypeList(request)
-        lossDatetimeRange = itemFilterUtils.getDatetimeRange(request)
+        itemPlace = Utils.getItemPlace(request)
+        itemTypeList = Utils.getItemTypeList(request)
+        lossDatetimeRange = Utils.getDatetimeRange(request)
 
         filteredItem = get_list_or_404(
             Item,
@@ -74,28 +74,49 @@ class ItemViewSet(viewsets.ModelViewSet):
         return Response(filterItemSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # 你的遺失物
-    @action(detail=False, methods=['get'], name="getlostitem by itemOwnerId")
-    def getUserLossItem(self, request):
-        userId = "1"#jwt("mailId")
-
+    @action(detail=False, methods=['get'], name="user lost item")
+    def userLossItem(self, request):
+        userId = Utils.getUserId(request)
         userLossItem = get_list_or_404(
             Item,
             accountId=userId,
             foundOrLoss="loss"
         )
-        itemSerializer = ItemSerializer(userLossItem, many=True)
-        return Response(itemSerializer.data, status=status.HTTP_200_OK)
-
+        filterItemSerializer = FilterItemSerializer(userLossItem, many=True)
+        return Response(filterItemSerializer.data, status=status.HTTP_200_OK)
     
     # 你的拾獲案件
-    @action(detail=False, methods=['get'], name="getlostitem by itemOwnerId")
-    def getUserFoundItem(self, request):
-        userId = "1"#jwt("mailId")
+    @action(detail=False, methods=['get', 'post'], name="user found item")
+    def userFoundItem(self, request):
+        if request.method == 'GET':
+            userId = Utils.getUserId(request)
+            userFoundItem = get_list_or_404(
+                Item,
+                accountId=userId,
+                foundOrLoss="found"
+            )
+            filterItemSerializer = FilterItemSerializer(userFoundItem, many=True)
+            return Response(filterItemSerializer.data, status=status.HTTP_200_OK)
 
-        userFoundItem = get_list_or_404(
-            Item,
-            accountId=userId,
-            foundOrLoss="loss"
-        )
-        itemSerializer = ItemSerializer(userFoundItem, many=True)
-        return Response(itemSerializer.data, status=status.HTTP_200_OK)
+        elif request.method == 'POST':
+            print("post")
+            userId = Utils.getUserId(request)
+            itemStatus = Utils.getItemStatus(request)
+            itemPlace = Utils.getItemPlace(request)
+            itemTypeList = Utils.getItemTypeList(request)
+            lossDatetimeRange = Utils.getDatetimeRange(request)
+
+            filteredFoundItem = get_list_or_404(
+                Item,
+                foundOrLoss="found",
+                accountId=userId,
+                status=itemStatus,
+                itemPlace__icontains=itemPlace,
+                itemType__in=itemTypeList,
+                lossDatetime__range=lossDatetimeRange
+            )
+
+            filterItemSerializer = FilterItemSerializer(filteredFoundItem, many=True)
+            if filterItemSerializer != None:
+                return Response(filterItemSerializer.data, status=status.HTTP_201_CREATED)
+            return Response(filterItemSerializer.errors, status=status.HTTP_400_BAD_REQUEST)

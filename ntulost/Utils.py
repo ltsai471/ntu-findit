@@ -34,3 +34,12 @@ def getDatetimeRange(request):
     if endDatetime in ["", None]:
         endDatetime = datetime.datetime(2022, 7, 1, 1, 30)
     return (startDatetime, endDatetime)
+
+def getItemStatus(request):
+    itemStatus = request.data.get("status")
+    if itemStatus in ["", None]:
+        itemStatus = "contact"
+    return itemStatus
+
+def getUserId(request):
+    return "1"#jwt("mailId")

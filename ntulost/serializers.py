@@ -40,6 +40,6 @@ class AccountSerializer(serializers.ModelSerializer):
 class FilterItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = ('id', "lossDatetime", "preservePlace",
-                  'status', "itemPlace", "itemType", "img")
+        fields = ("id", "status", "lossDatetime", "itemPlace", 
+                  "preservePlace", "itemType", 'itemDesc', "img")
 
