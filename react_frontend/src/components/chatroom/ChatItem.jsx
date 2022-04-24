@@ -1,19 +1,19 @@
 import * as React from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
-export default function ChatItem() {
+export default function ChatItem(props) {
+    const chat = props.chat;
     const [selectedIndex, setSelectedIndex] = React.useState(1);
 
     const handleListItemClick = (
-      event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-      index: number,
+        event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+        index: number,
     ) => {
-      setSelectedIndex(index);
+        setSelectedIndex(index);
     };
 
     return (
@@ -22,10 +22,10 @@ export default function ChatItem() {
             onClick={(event) => handleListItemClick(event, 2)}
         >
             <ListItemAvatar>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                <Avatar alt={chat.target} src={chat.photo} />
             </ListItemAvatar>
             <ListItemText
-                primary="遺失案件－學生證"
+                primary={chat.caseName}
                 secondary={
                     <React.Fragment>
                         <Typography
@@ -34,15 +34,13 @@ export default function ChatItem() {
                             variant="body2"
                             color="text.primary"
                         >
-                            陳小花
+                            {chat.msgList[chat.msgList.length - 1].sendAccount}
                         </Typography>
-                        {": 好ㄟ那我跟你約公館站2號出口喔"}
+                        {": " + chat.msgList[chat.msgList.length - 1].context}
                     </React.Fragment>
                 }
             />
         </ListItemButton>
-
-        //   <Divider variant="inset" component="li" />
     );
 
 }

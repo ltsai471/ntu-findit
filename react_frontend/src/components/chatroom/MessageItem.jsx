@@ -1,13 +1,11 @@
 import React, { Component, useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import Grid from "@mui/material/Grid";
 import themeColor from '../../config';
 
-export default function MessageItem() {
+export default function MessageItem(props) {
     const [loading, setLoading] = useState(true);
-    const [orders, setOrders] = useState([]);
     const verticalCenter = {
         margin: 0,
         position: 'relative',
@@ -46,55 +44,77 @@ export default function MessageItem() {
         'text-align': 'right',
     };
 
-    // const { fromMe, text} = this.props;
+    if (props.fromMe) {
+        return (
+            <div className="message-item message-from-me" style={meDivStyle}>
+                <Box component="div" sx={{ margin: '5px' }}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} md={10}>
+                            <span style={meMsgStyle}>{props.context}</span>
+                        </Grid>
+                        <Grid item xs={12} md={1} style={{ 'text-align': 'right' }}>
+                            <Avatar alt={props.sendAccount} src={props.photo} />
+                        </Grid>
+                    </Grid>
+                </Box>
+            </div>
+        )
+    }
+    else {
+        return (
+            <div className="message-item message-from-other">
+                <Box component="div" sx={{ margin: '5px' }}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} md={1} style={{ 'text-align': 'right', margin: 0 }}>
+                            <Avatar alt={props.sendAccount} src={props.photo} />
+                        </Grid>
+                        <Grid item xs={12} md={10}>
+                            <span style={otherMsgStyle}>{props.context}</span>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </div>
+        )
+    }
+
     // return (
-    //   <div className={`message-item ${fromMe ? 'message-from-me' : 'message-from-other'}`}>
-    //     <span>{text}</span>
-    //   </div>
+    //     // <div className="message-item message-from-other">
+    //     //     <Box component="div" sx={{ margin: '5px' }}>
+    //     //         <Grid container spacing={2}>
+    //     //             <Grid item xs={12} md={1} style={{ 'text-align': 'right', margin: 0 }}>
+    //     //                 <Avatar alt={msg.sendAccount} src={msg.photo} />
+    //     //             </Grid>
+    //     //             <Grid item xs={12} md={10}>
+    //     //                 <span style={otherMsgStyle}>{msg.context}</span>
+    //     //             </Grid>
+    //     //         </Grid>
+    //     //     </Box>
+    //     // </div>
+    //     <div className="message-item message-from-me" style={meDivStyle}>
+    //         <Box component="div" sx={{ margin: '5px' }}>
+    //             <Grid container spacing={2}>
+    //                 <Grid item xs={12} md={10}>
+    //                     <span style={meMsgStyle}>{msg.context}</span>
+    //                 </Grid>
+    //                 <Grid item xs={12} md={1} style={{ 'text-align': 'right' }}>
+    //                     <Avatar alt={msg.sendAccount} src={msg.photo} />
+    //                 </Grid>
+    //             </Grid>
+    //         </Box>
+    //     </div>
+
+
+    //     // <div className="message-item message-from-other">
+    //     //     <span>試著</span>
+    //     // </div>
+    //     // <div className="message-item message-from-other">
+    //     //     <span>靠左邊嘛</span>
+    //     // </div>
+    //     // <div className="message-item message-from-me">
+    //     //     <span>換我了</span>
+    //     // </div>
+    //     // <div className="message-item message-from-me">
+    //     //     <span>有看到嗎</span>
+    //     // </div>
     // );
-
-    return (
-        <div className="message-item message-from-other">
-            <Box component="div" sx={{ margin: '5px' }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} md={1} style={{ 'text-align': 'right', margin: 0 }}>
-                        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                    </Grid>
-                    <Grid item xs={12} md={10}>
-                        <span style={otherMsgStyle}>對啊</span>
-                    </Grid>
-                </Grid>
-            </Box>
-            {/* <Typography variant="body1" component="div" gutterBottom style={otherMsgStyle}>
-                對啊
-            </Typography> */}
-        </div>
-
-        // <div className="message-item message-from-me" style={meDivStyle}>
-        //     <Box component="div" sx={{ margin: '5px' }}>
-        //         <Grid container spacing={2}>
-        //             <Grid item xs={12} md={10}>
-        //                 <span style={meMsgStyle}>對啊</span>
-        //             </Grid>
-        //             <Grid item xs={12} md={1} style={{ 'text-align': 'right' }}>
-        //                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-        //             </Grid>
-        //         </Grid>
-        //     </Box>
-        // </div>
-
-
-        // <div className="message-item message-from-other">
-        //     <span>試著</span>
-        // </div>
-        // <div className="message-item message-from-other">
-        //     <span>靠左邊嘛</span>
-        // </div>
-        // <div className="message-item message-from-me">
-        //     <span>換我了</span>
-        // </div>
-        // <div className="message-item message-from-me">
-        //     <span>有看到嗎</span>
-        // </div>
-    );
 }

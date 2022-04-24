@@ -10,11 +10,24 @@ import SendIcon from '@mui/icons-material/Send';
 import MessageItem from "./MessageItem";
 import themeColor from '../../config';
 
-export default function MessageWindow() {
+export default function MessageWindow(props) {
+    const chat = props.chat;
     const [loading, setLoading] = useState(true);
-    const [orders, setOrders] = useState([]);
+    const rows = [];
+    if (chat.msgList.length > 0) {
+        chat.msgList.forEach((msg) => {
+            rows.push(
+                <MessageItem
+                    fromMe={msg.sendAccount == '我' ? true : false}
+                    photo={chat.photo} //my photo error
+                    sendAccount={msg.sendAccount}
+                    context={msg.context}
+                />
+            );
+        });
+    }
+
     const divStyle = {
-        // 'background-color': 'WhiteSmoke',
         'border-width': '1px',
         'border-style': 'solid',
         'border-color': '#E5E7E9',
@@ -39,14 +52,15 @@ export default function MessageWindow() {
         color: themeColor["primary"],
     };
 
+
     return (
         <div className="chat-app_right" style={divStyle}>
             <Typography variant="h5" component="div" gutterBottom align="center">
-                陳小花
+                {chat.target}
             </Typography>
             <Divider variant="middle" />
             <div className="message-list" style={windowStyle}>
-                <MessageItem />
+                {rows}
             </div>
             <Box sx={{ position: 'absolute', bottom: 0, width: '70%' }}>
                 <Grid container spacing={2}>
@@ -54,7 +68,7 @@ export default function MessageWindow() {
                         <TextField id="filled-basic" hiddenLabel variant="filled" sx={{ width: '100%' }} />
                     </Grid>
                     <Grid item xs={12} md={1}>
-                        <IconButton  size="large" style={verticalCenter}>
+                        <IconButton size="large" style={verticalCenter}>
                             <SendIcon fontSize="inherit" />
                         </IconButton>
                     </Grid>
