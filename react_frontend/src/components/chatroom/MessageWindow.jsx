@@ -3,17 +3,22 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 // import { positions } from '@material-ui/system';
 import Box from '@mui/material/Box';
+import Grid from "@mui/material/Grid";
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import SendIcon from '@mui/icons-material/Send';
 import MessageItem from "./MessageItem";
+import themeColor from '../../config';
 
 export default function MessageWindow() {
     const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState([]);
     const divStyle = {
         // 'background-color': 'WhiteSmoke',
-        'border-width':'1px',
-        'border-style':'solid',
-        'border-color':'#E5E7E9',
-        padding:'5px',
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': '#E5E7E9',
+        padding: '5px',
         height: '100vh',
     };
 
@@ -23,22 +28,38 @@ export default function MessageWindow() {
 
     const inputStyle = {
         'border-radius': '10px',
-        width: '100%',
+    };
+
+    const verticalCenter = {
+        margin: 0,
+        position: 'relative',
+        top: '50%',
+        '-ms-transform': 'translateY(-50%)',
+        transform: 'translateY(-50%)',
+        color: themeColor["primary"],
     };
 
     return (
         <div className="chat-app_right" style={divStyle}>
             <Typography variant="h5" component="div" gutterBottom align="center">
-                Elsa
+                陳小花
             </Typography>
             <Divider variant="middle" />
             <div className="message-list" style={windowStyle}>
                 <MessageItem />
             </div>
-            <Box sx={{ position: 'absolute', bottom:0, width:'70%' }}>
-                <input className="new-message" type="text" style={inputStyle} />
+            <Box sx={{ position: 'absolute', bottom: 0, width: '70%' }}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} md={11}>
+                        <TextField id="filled-basic" hiddenLabel variant="filled" sx={{ width: '100%' }} />
+                    </Grid>
+                    <Grid item xs={12} md={1}>
+                        <IconButton  size="large" style={verticalCenter}>
+                            <SendIcon fontSize="inherit" />
+                        </IconButton>
+                    </Grid>
+                </Grid>
             </Box>
-            
         </div>
     );
 }
