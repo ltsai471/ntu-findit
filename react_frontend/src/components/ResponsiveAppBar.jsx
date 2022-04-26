@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import themeColor from "../../config.js";
+import themeColor from "../config.js";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -17,14 +17,18 @@ import MenuItem from "@mui/material/MenuItem";
 import { convertLength } from "@mui/material/styles/cssUtils";
 
 const pages = ["聊天室", "刊登拾獲案件", "申報遺失物"];
-const settings = ["個人資料", "Account", "Dashboard", "Logout"];
+
 const pageRoutes = {
   聊天室: "/mainpage",
   刊登拾獲案件: "/lostPublish",
   申報遺失物: "/lostReport",
+  個人資料: "/personalPage",
+  Login: "/",
+  Logout: "/",
 };
 
-const ResponsiveAppBar = () => {
+const ResponsiveAppBar = ({ loggedIn }) => {
+  const settings = ["個人資料", `${loggedIn ? "Logout" : "Login"}`];
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -50,7 +54,7 @@ const ResponsiveAppBar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            NTU Lost
+            NTU Findit
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -136,7 +140,10 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => onClickRedirect(pageRoutes[setting])}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
