@@ -27,11 +27,6 @@
 
 ## Frontend Key File
 - `react_frontend/src/index.js` root page
-- Components structure
-    - first_page (OrderListContainer)
-        - OrderList
-            - OrderRow
-    - second_page (OrderDetail)
 
 
 ## Referance
