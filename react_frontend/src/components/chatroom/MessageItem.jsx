@@ -30,6 +30,7 @@ export default function MessageItem(props) {
     const otherMsgStyle = {
         background: '#cce6d3',
         'border-radius': '50px',
+        border: 0,
         padding: '5px 10px 5px 10px',
         width: 'fit-content',
         margin: 0,

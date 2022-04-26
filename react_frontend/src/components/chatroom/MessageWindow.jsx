@@ -1,7 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-// import { positions } from '@material-ui/system';
 import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
 import TextField from '@mui/material/TextField';
@@ -65,10 +64,18 @@ export default function MessageWindow(props) {
             <Box sx={{ position: 'absolute', bottom: 0, width: '70%' }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={11}>
-                        <TextField id="filled-basic" hiddenLabel variant="filled" sx={{ width: '100%' }} />
+                        <TextField
+                            id="filled-basic"
+                            hiddenLabel
+                            variant="filled"
+                            sx={{ width: '100%' }}
+                            value={props.newMessage}
+                            onChange={props.messageChange}
+                            // onKeyDown={props.handleKeyDown}
+                             />
                     </Grid>
                     <Grid item xs={12} md={1}>
-                        <IconButton size="large" style={verticalCenter}>
+                        <IconButton size="large" style={verticalCenter} onClick={props.sendMsg} >
                             <SendIcon fontSize="inherit" />
                         </IconButton>
                     </Grid>

@@ -18,29 +18,36 @@ export default function ChatList(props) {
         'align-items': 'center',
     };
 
-    const rows = [];
-    if (props.chat.length > 0) {
-        props.chat.forEach((chat) => {
-            rows.push(
-                <ChatItem
-                    chat={chat}
-                    key={chat.chatroomId} />
-            );
-            rows.push(
-                <Divider variant="inset" component="li" />
-            );
-        });
-    }
-    else {
-        rows.push(
-            <ListItem>
-                <ListItemText
-                    primary="沒有聊天紀錄"
-                />
-            </ListItem>
-        );
-    }
-
+    // const rows = [];
+    // if (props.chat.length > 0) {
+    //     props.chat.forEach((chat) => {
+    //         rows.push(
+    //             <ChatItem
+    //                 chat={chat}
+    //                 key={chat.chatroomId}
+    //                 changeChatroom={props.changeChatroom.bind(chat.chatroomId)} />
+    //         );
+    //         rows.push(
+    //             <Divider variant="inset" component="li" />
+    //         );
+    //     });
+    // }
+    // else {
+    //     rows.push(
+    //         <ListItem>
+    //             <ListItemText
+    //                 primary="沒有聊天紀錄"
+    //             />
+    //         </ListItem>
+    //     );
+    // }
+    const rows = props.chat.map((chat, index) =>
+        <ChatItem
+            chat={chat}
+            key={chat.chatroomId}
+            index={index}
+            changeChatroom={props.changeChatroom} />
+    );
 
     return (
         <div style={divStyle}>

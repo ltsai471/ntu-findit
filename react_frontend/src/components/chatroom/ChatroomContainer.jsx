@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ChatList from "./ChatList";
 import MessageWindow from "./MessageWindow";
 import Grid from "@mui/material/Grid";
@@ -45,88 +45,66 @@ export default function ChatroomContainer() {
   const [loading, setLoading] = useState(true);
   const [chat, setChat] = useState(initChat);
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const [query, setQuery] = useState();
-  // const submitQuery = (e) => {
-  //   e.preventDefault();
-  //   getOrders(query).then((result) => {
-  //     setOrders(result);
-  //   });
-  // };
+  const [newMessage, setNewMessage] = useState('');
 
-  // const initialState = {
-  //     newMessage: '',
-  //     threads: [
-  //       {
-  //         target: {
-  //           name: 'Elsa',
-  //           profilePic: 'http://lorempixel.com/50/50/people/1'
-  //         },
-  //         messages: [
-  //           { fromMe: false, text: '蛤？', time: '12:27am' },
-  //           { fromMe: false, text: '來來來～', time: '12:27am' },
-  //           { fromMe: false, text: '靠左邊嗎？', time: '12:27am' },
-  //           { fromMe: true, text: '換我了！', time: '12:27am' },
-  //           { fromMe: true, text: '有看到嗎？', time: '12:27am' },
-  //         ]
-  //       },
-  //       {
-  //         target: {
-  //           name: 'Katharine',
-  //           profilePic: 'http://lorempixel.com/50/50/people/9'
-  //         },
-  //         messages: [
-  //           { fromMe: false, text: '對啊！', time: '12:27am' },
-  //         ]
-  //       },
-  //       {
-  //         target: {
-  //           name: 'Marshall',
-  //           profilePic: 'http://lorempixel.com/50/50/people/7'
-  //         },
-  //         messages: [
-  //           { fromMe: false, text: '好呦～', time: '12:27am' },
-  //         ]
-  //       }
-  //     ],
-  //     currentIndex: 0
-  //   };
+  const changeChatroom = (e) => {
+    // setCurrentIndex(e);
+    console.log(e);
+  };
 
-  //   handleMessageChange(event) {
-  //     this.setState({ newMessage: event.target.value });
-  //   }
+  // const changeChatroom = useCallback(
+  //   (e) => {
+  //     setCurrentIndex(e);
+  //     console.log(e);
+  //     // setCurrentIndex(e.target.getAttribute("data-id").value);
+      
+  //   },
+  //   [], // Tells React to memoize regardless of arguments.
+  // );
+
+  const handleMessageChange = (e) => {
+    setNewMessage(e.target.value);
+  };
+
+  const sendMsg = (e) => {
+    const time = new Date().toDateString();
+    const addMessage = {
+      context: newMessage,
+      sendAccount: '我',
+      sendDatetime: time
+    };
+
+    // if (e.keyCode === 13 && newMessage !== '') {
+    if (newMessage !== '') {
+      chat[currentIndex].msgList.push(addMessage);
+      setChat(chat);
+    }
+    setNewMessage('');
+  };
 
   //   handleMessagerChange(event) {
   //     this.setState({ currentIndex: event });
   //   }
 
-  //   handleKeyDown(event) {
-  //     const message = event.target.value;
-  //     const time = new Date().toDateString();
-  //     const addMessage = {fromMe: true, text: message, time: time};
-
-  //     if (event.keyCode === 13 && message !== '') {
-  //       const {threads, currentIndex} = this.state;
-  //       threads[currentIndex].messages.push(addMessage);
-
-  //       this.setState({
-  //         newMessage: '',
-  //         threads: threads
-  //       });
-  //     }
-  //   }
-
-  //css
   const divStyle = {
     height: '100vh',
   };
 
+  useEffect(() => {
+    document.title = `currentIndex: ${currentIndex}`;
+  });
+
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} md={3} style={divStyle}>
-        <ChatList chat={chat} />
+      <Grid item xs={12} sm={6} md={3} style={divStyle}>
+        <ChatList chat={chat} changeChatroom={changeChatroom} />
       </Grid>
-      <Grid item xs={12} md={9} style={divStyle}>
-        <MessageWindow chat={chat[currentIndex]} />
+      <Grid item xs={12} sm={6} md={9} style={divStyle}>
+        {/* <MessageWindow
+          chat={chat[currentIndex]}
+          newMessage={newMessage}
+          messageChange={handleMessageChange}
+          sendMsg={sendMsg} /> */}
       </Grid>
     </Grid>
   );

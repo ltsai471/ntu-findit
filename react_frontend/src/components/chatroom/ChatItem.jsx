@@ -7,19 +7,14 @@ import Typography from '@mui/material/Typography';
 
 export default function ChatItem(props) {
     const chat = props.chat;
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
-
-    const handleListItemClick = (
-        event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-        index: number,
-    ) => {
-        setSelectedIndex(index);
-    };
 
     return (
         <ListItemButton
-            selected={selectedIndex === 2}
-            onClick={(event) => handleListItemClick(event, 2)}
+            data-id={"test" + props.index}
+            // selected={selectedIndex === 2}
+            onClick={props.changeChatroom}
+        // onClick={(event) => handleListItemClick(event, 2)}
+        // onChange={event => handleListItemClick(event.target)}
         >
             <ListItemAvatar>
                 <Avatar alt={chat.target} src={chat.photo} />
