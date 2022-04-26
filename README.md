@@ -26,7 +26,7 @@
 - `ntulost/view.py` display JSON api: http://localhost:8000/api/orders/
 
 ## Frontend Key File
-- `react_frontend/src/index.js` root page
+- `react_frontend/src/App.js` root page
 
 
 ## Referance
