@@ -11,6 +11,9 @@ def api_overview(request):
         'notice': '**This list is only for api preview, please check ntulost/urls.py to see the newest api urls.**',
         'Items List and Create': '/item',
         'Item Update and Delete': '/item/<int:id>',
+        'Get itempair List': '/itempair',
+        'Verify account data': '/login',
+        'Create an Account': '/signup',
     }
     return Response(api_urls)
 

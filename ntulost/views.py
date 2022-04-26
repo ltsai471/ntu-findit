@@ -3,22 +3,12 @@ from django.views import View
 from django.http import JsonResponse, Http404
 
 from rest_framework import viewsets, status, renderers
-from rest_framework.decorators import api_view, action
+from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from .serializers import FilterItemSerializer, ItemSerializer
 from .models import Item, ItemTypeLevel2, ItemTypeLevel1
 from . import Utils
-
-
-@api_view(['GET'])
-def api_overview(request):
-    api_urls = {
-        'notice': '**This list is only for api preview, please check ntulost/urls.py to see the newest api urls.**',
-        'Items List and Create': '/item',
-        'Item Update and Delete': '/item/<int:id>',
-    }
-    return Response(api_urls)
 
 
 class TestView(View):
