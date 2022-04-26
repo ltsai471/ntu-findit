@@ -1,13 +1,8 @@
 # Development
 
 ## NOTICE!!
-<<<<<<< HEAD
 - 如果有DB相關的問題一定要跟祐琳講!! (欄位看不懂或不知道要填什麼、欄位增刪、必輸欄位取消、pk自動給號 etc.)
 - 每個功能都要寫測試文件，包含測試的input、output、例外處理等等
-=======
-
-- 如果有 DB 相關的問題一定要跟祐琳講!! (欄位看不懂或不知道要填什麼、欄位增刪、必輸欄位取消、pk 自動給號 etc.)
->>>>>>> master
 
 ## GIT
 
@@ -132,4 +127,19 @@ npm run build
 (cd to NTU_Lost)
 python manage.py makemigrations ntulost
 python manage.py migrate
+</code></pre>
+
+## Convert *Uint8Array* to *JPEG* Image from JSON Request
+
+<code><pre>
+import cv2
+import numpy as np
+from PIL import Image
+data = request.json
+imageArray = data["image"]
+imgBGR = cv2.imdecode(np.array(imageArray, dtype=np.uint8),
+                       cv2.IMREAD_COLOR)
+imgRGB = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2RGB)
+imgRGB = Image.fromarray(imgRGB)
+imgRGB.save("save_path/new_image.jpeg")
 </code></pre>

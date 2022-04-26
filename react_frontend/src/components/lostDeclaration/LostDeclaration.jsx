@@ -28,7 +28,8 @@ class LostDeclaration extends React.Component {
         super(props);
 
         this.pageColor = themeColor[this.props.pageColor];
-        this.title = this.props.title
+        this.title = this.props.title;
+        this.foundOrLoss = this.props.foundOrLoss;
 
         this.state = {
             time: new Date(),
@@ -82,8 +83,7 @@ class LostDeclaration extends React.Component {
 
 
     handleSubmit(event) {
-        // event.preventDefault();
-        // const url = 'http://localhost:5000/';  // Should be changed to API url 
+        // const url = 'http://localhost:5000/';  // Should be changed to API url
         // const formData = new FormData();
         // for (const [key, value] of Object.entries(this.state)) {
         //     console.log(key, value);
@@ -101,20 +101,32 @@ class LostDeclaration extends React.Component {
         //     .catch(error => {
         //         console.log(error);
         //     });
-        return fetch('http://localhost:5000', {
+        // http://localhost:5000
+        event.preventDefault();
+        return fetch('http://localhost:8000/ntulost/item/', {
+            method: 'POST',
             headers: {
                 "content-type": "application/json"
             },
-            method: 'POST',
             body: JSON.stringify({
-                time: this.state.time,
-                location: this.state.location,
-                category: this.state.category,
-                description: this.state.description,
+                foundOrLoss: this.foundOrLoss,
+                status: "finding",
+                accountId: "1",
+                lossDatetime: this.state.time,
+                itemPlace: this.state.location,
+                // preservePlace: "xx保管處4",
+                itemType: this.state.category,
+                itemDesc: this.state.description,
                 image: Array.from(new Uint8Array(this.state.image)),
             }),
         }).then((res) => {
-            console.log(res);
+            console.log(res.status);
+            if (res.status == 201) {
+                this.foundOrLoss == "loss" ? alert("申報成功") : alert("刊登成功");
+                window.location.reload();
+            } else {
+                this.foundOrLoss == "loss" ? alert("申報失敗") : alert("刊登失敗");
+            }
         })
             .catch(err => console.log('err', err))
     }

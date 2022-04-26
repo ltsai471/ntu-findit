@@ -19,13 +19,21 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB
 def upload_file():
     # file = request.files['image']
     data = request.json
-    time = data["time"]
-    location = data["location"]
-    category = data["category"]
-    description = data["description"]
-    imageArray = data["image"]
-    print(time, location, category, description, len(imageArray))
-    imgBGR = cv2.imdecode(np.array(imageArray, dtype=np.uint8),
+    # foundOrLoss = data["foundOrLoss"]
+    # status = data["status"]
+    # accountId = data["accountId"]
+    # lossDatetime = data["lossDatetime"]
+    # itemPlace = data["itemPlace"]
+    # preservePlace = data["preservePlace"]
+    # itemType = data["itemType"]
+    # itemDesc = data["itemDesc"]
+    # imageArray = data["image"]
+    for key in data:
+        if key == "image":
+            print(f"{key}: {data[key][:5]}...")
+        else:
+            print(f"{key}: {data[key]}")
+    imgBGR = cv2.imdecode(np.array(data["image"], dtype=np.uint8),
                        cv2.IMREAD_COLOR)
     imgRGB = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2RGB)
     imgRGB = Image.fromarray(imgRGB)

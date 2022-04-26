@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import OrderSerializer, ItemSerializer, AccountSerializer
+from .serializers import OrderSerializer, ItemSerializer, AccountSerializer, ItemPairSerializer
 from .models import Order, Item, Account
 
 
@@ -87,3 +87,14 @@ def signup(request):
         if accountSerializer.is_valid():
             accountSerializer.save()
         return Response(accountSerializer.data)
+
+
+@api_view(['POST'])
+def item_pair(request):
+    if request.method == 'POST':
+        itemPairSerializer = ItemPairSerializer(data=request.data)
+        if itemPairSerializer.is_valid():
+            itemPairSerializer.save()
+            return Response(itemPairSerializer.data, status=status.HTTP_201_CREATED)
+        return Response(itemPairSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
