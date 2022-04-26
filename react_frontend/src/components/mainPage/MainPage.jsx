@@ -8,7 +8,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 
 import themeColor from "../../config.js";
-import ResponsiveAppBar from "./ResponsiveAppBar";
+// import ResponsiveAppBar from "./ResponsiveAppBar";
 import BasicDateTimePicker from "./BasicDateTimePicker";
 // import GoogleMapPicker from "./GoogleMapPicker";
 import Filter from "./Filter";
@@ -28,9 +28,9 @@ class MainPage extends React.Component {
       <React.Fragment>
         <CssBaseline />
         <Box sx={{ width: "100%" }}>
-          <Item>
+          {/* <Item>
             <ResponsiveAppBar />
-          </Item>
+          </Item> */}
           <Item>
             <Grid container spacing={2}>
               <Grid item xs={12} md={3}>
