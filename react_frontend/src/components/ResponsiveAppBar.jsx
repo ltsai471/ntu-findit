@@ -19,7 +19,7 @@ import { convertLength } from "@mui/material/styles/cssUtils";
 const pages = ["聊天室", "刊登拾獲案件", "申報遺失物"];
 const settings = ["個人資料", "Account", "Dashboard", "Logout"];
 const pageRoutes = {
-  聊天室: "/mainpage",
+  聊天室: "/chatroom",
   刊登拾獲案件: "/lostPublish",
   申報遺失物: "/lostReport",
 };

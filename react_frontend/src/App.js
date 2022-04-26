@@ -6,6 +6,7 @@ import AuthContext from "./contexts";
 import axios from 'axios';
 import {
   LoginPage,
+  ResponsiveAppBar,
   Footer,
   SignIn,
   SignUp,
@@ -13,7 +14,7 @@ import {
   MainPage,
   LostReturn,
   PersonalPage,
-  ResponsiveAppBar,
+  ChatroomContainer,
 } from "./components";
 
 axios.defaults.xsrfCookieName = 'csrftoken'
@@ -45,6 +46,7 @@ export default function App() {
           <Route path="/mainPage" element={<MainPage />} />
           <Route path="/lostReturn" element={<LostReturn pageColor="secondaryLight" />} />
           <Route path="/personalPage" element={<PersonalPage pageColor="primary" />} />
+          <Route path="/chatroom" element={<ChatroomContainer pageColor="primary" />} />
         </Routes>
         {/* <Footer /> */}
       </Router>
