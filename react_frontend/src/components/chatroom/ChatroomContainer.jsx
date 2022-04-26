@@ -100,11 +100,11 @@ export default function ChatroomContainer() {
         <ChatList chat={chat} changeChatroom={changeChatroom} />
       </Grid>
       <Grid item xs={12} sm={6} md={9} style={divStyle}>
-        {/* <MessageWindow
+        <MessageWindow
           chat={chat[currentIndex]}
           newMessage={newMessage}
           messageChange={handleMessageChange}
-          sendMsg={sendMsg} /> */}
+          sendMsg={sendMsg} />
       </Grid>
     </Grid>
   );
