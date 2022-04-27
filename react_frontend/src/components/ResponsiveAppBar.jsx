@@ -17,11 +17,14 @@ import MenuItem from "@mui/material/MenuItem";
 import { convertLength } from "@mui/material/styles/cssUtils";
 
 const pages = ["聊天室", "刊登拾獲案件", "申報遺失物"];
-const settings = ["個人資料", "Account", "Dashboard", "Logout"];
+
 const pageRoutes = {
   聊天室: "/chatroom",
   刊登拾獲案件: "/lostPublish",
   申報遺失物: "/lostReport",
+  個人資料: "/personalPage",
+  Login: "/",
+  Logout: "/",
 };
 
 function ResponsiveAppBar() {
@@ -50,7 +53,7 @@ function ResponsiveAppBar() {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            NTU Lost
+            NTU Findit
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -136,7 +139,10 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => onClickRedirect(pageRoutes[setting])}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

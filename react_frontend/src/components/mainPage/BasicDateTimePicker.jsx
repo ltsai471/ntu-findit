@@ -13,20 +13,23 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 // npm i @mui/lab
 // npm i date-fns
 
-export default function BasicDateTimePicker() {
-  const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(startTime.getTime() + 1000 * 60 * 60);
-
+export default function BasicDateTimePicker({
+  startDatetime,
+  endDatetime,
+  setStartDatetime,
+  setEndDatetime,
+}) {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Box sx={{ width: "100%" }}>
         <h5 style={{ marginTop: "10px" }}>時間</h5>
+
         <Box sx={{ m: 2 }}>
           <DateTimePicker
             renderInput={(props) => <TextField {...props} />}
             label="開始"
-            value={startTime}
-            onChange={(newStartTime) => setStartTime(newStartTime)}
+            value={startDatetime}
+            onChange={(newStartTime) => setStartDatetime(newStartTime)}
           />
         </Box>
 
@@ -34,8 +37,8 @@ export default function BasicDateTimePicker() {
           <DateTimePicker
             renderInput={(props) => <TextField {...props} />}
             label="結束"
-            value={endTime}
-            onChange={(newEndTime) => setEndTime(newEndTime)}
+            value={endDatetime}
+            onChange={(newEndTime) => setEndDatetime(newEndTime)}
           />
         </Box>
       </Box>
