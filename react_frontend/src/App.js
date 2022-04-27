@@ -5,20 +5,16 @@ import { verifyAccount } from "./webAPI";
 import AuthContext from "./contexts";
 import axios from 'axios';
 import {
-    LoginPage,
-    Navigation,
-    Footer,
-    OrderListContainer,
-    OrderDetail,
-    ApplyLossPage,
-    TestPage,
-    SignIn,
-    SignUp,
-    LostDeclaration,
-    MainPage,
-    LostReturn,
-    PersonalPage,
-    ChatroomContainer,
+  LoginPage,
+  ResponsiveAppBar,
+  Footer,
+  SignIn,
+  SignUp,
+  LostDeclaration,
+  MainPage,
+  LostReturn,
+  PersonalPage,
+  ChatroomContainer,
 } from "./components";
 
 axios.defaults.xsrfCookieName = 'csrftoken'
@@ -37,24 +33,20 @@ export default function App() {
     }
   }, []);
 
-    return (
-        <AuthContext.Provider value={{ user, setUser }}>
-            <Router>
-                {/* <Navigation /> */}
-                <Routes>
-                    {/* <Route path="/login" element={<LoginPage />} /> */}
-                    <Route path="/" element={<SignIn pageColor="primary" />} />
-                    <Route path="/signUp" element={<SignUp pageColor="primary" />} />
-                    <Route path="/lostReport" element={<LostDeclaration title="遺失物申報" pageColor="secondary" foundOrLoss="loss" />} />
-                    <Route path="/lostPublish" element={<LostDeclaration title="拾獲案件刊登" pageColor="secondaryLight" foundOrLoss="found" />} />
-                    <Route path="/mainPage" element={<MainPage />} />
-                    <Route path="/lostReturn" element={<LostReturn pageColor="secondaryLight" />} />
-                    <Route path="/personalPage" element={<PersonalPage pageColor="primary" />} />
-                    <Route path="/chatroom" element={<ChatroomContainer pageColor="primary" />} />
-                    {/* <Route path="/applyloss " element={<ApplyLossPage />} />
-                    <Route path="/test " element={<TestPage />} /> */}
-          {/* <Route path="/order" element={<OrderListContainer />} /> */}
-          {/* <Route path="/order/:orderDetail" element={<OrderDetail />} /> */}
+  return (
+    <AuthContext.Provider value={{ user, setUser }}>
+      <Router>
+        <ResponsiveAppBar />
+        <Routes>
+          {/* <Route path="/login" element={<LoginPage />} /> */}
+          <Route path="/" element={<SignIn pageColor="primary" />} />
+          <Route path="/signUp" element={<SignUp pageColor="primary" />} />
+          <Route path="/lostReport" element={<LostDeclaration title="遺失物申報" pageColor="secondary" foundOrLoss="loss" />} />
+          <Route path="/lostPublish" element={<LostDeclaration title="拾獲案件刊登" pageColor="secondaryLight" foundOrLoss="found" />} />
+          <Route path="/mainPage" element={<MainPage />} />
+          <Route path="/lostReturn" element={<LostReturn pageColor="secondaryLight" />} />
+          <Route path="/personalPage" element={<PersonalPage pageColor="primary" />} />
+          <Route path="/chatroom" element={<ChatroomContainer pageColor="primary" />} />
         </Routes>
         {/* <Footer /> */}
       </Router>
