@@ -8,8 +8,6 @@ from rest_framework import routers
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 from ntulost import views
 
-router = routers.DefaultRouter()
-router.register(r'orders', views.OrderView, 'order')
 # 跟Item有關的url
 itemRouter = routers.DefaultRouter()
 itemRouter.register(r'item', views.ItemViewSet, 'item')
@@ -17,7 +15,6 @@ itemRouter.register(r'item', views.ItemViewSet, 'item')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
     path('api/', include(itemRouter.urls)),
     path('api/test/', views.TestView.as_view(), name='test'),
     path('ntulost/', include('ntulost.urls')),

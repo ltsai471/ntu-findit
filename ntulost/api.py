@@ -1,29 +1,21 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import OrderSerializer, ItemSerializer, AccountSerializer, ItemPairSerializer
-from .models import Order, Item, Account
+from .serializers import ItemSerializer, AccountSerializer, ItemPairSerializer
+from .models import Item, Account
 
 
 @api_view(['GET'])
 def api_overview(request):
     api_urls = {
-        'notice':'**This list is only for api preview, please check ntulost/urls.py to see the newest api urls.**',
-        'Items List and Create':'/item',
-        'Item Update and Delete':'/item/<int:id>',
+        'notice': '**This list is only for api preview, please check ntulost/urls.py to see the newest api urls.**',
+        'Items List and Create': '/item',
+        'Item Update and Delete': '/item/<int:id>',
+        'Get itempair List': '/itempair',
+        'Verify account data': '/login',
+        'Create an Account': '/signup',
     }
     return Response(api_urls)
-
-
-class OrderView(viewsets.ModelViewSet):
-    serializer_class = OrderSerializer
-
-    def get_queryset(self):
-        queryset = Order.objects.all()
-        para = self.request.query_params.get('query')
-        if para:
-            queryset = Order.objects.filter(customer__icontains=para)
-        return queryset
 
 
 @api_view(['GET', 'POST'])
@@ -74,7 +66,7 @@ def login(request):
         except Account.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        return Response({'msg':pwd == account.pwd})
+        return Response({'msg': pwd == account.pwd})
 
 
 @api_view(['POST'])
@@ -97,4 +89,3 @@ def item_pair(request):
             itemPairSerializer.save()
             return Response(itemPairSerializer.data, status=status.HTTP_201_CREATED)
         return Response(itemPairSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
