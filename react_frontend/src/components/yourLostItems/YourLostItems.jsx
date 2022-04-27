@@ -70,19 +70,27 @@ const YourLostItems = () => {
   }, []);
   return (
     <>
-      <Box sx={{ width: "100%" }}>
-        <Item>
-          <ResponsiveAppBar />
-        </Item>
-        <Item>
+      <Box>
+        <ResponsiveAppBar />
+      </Box>
+      <Box
+        sx={{
+          width: "100%",
+          mt: "2%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
           <TitledList title={"尋找中"} listOfItems={findingItems} />
-        </Item>
-        <Item>
+        </Box>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
           <TitledList title={"自動配對案件"} listOfItems={matchedItems} />
-        </Item>
-        <Item>
+        </Box>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
           <TitledList title={"已尋回"} listOfItems={doneItems} />
-        </Item>
+        </Box>
       </Box>
     </>
   );
