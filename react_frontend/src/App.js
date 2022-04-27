@@ -37,10 +37,8 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <Router>
-        {/* <Navigation /> */}
         <ResponsiveAppBar />
         <Routes>
-          {/* <Route path="/login" element={<LoginPage />} /> */}
           <Route path="/" element={<SignIn pageColor="primary" />} />
           <Route path="/signUp" element={<SignUp pageColor="primary" />} />
           <Route
@@ -75,6 +73,8 @@ export default function App() {
           <Route
             path="/chatroom"
             element={<ChatroomContainer pageColor="primary" />}
+          />
+          path="/yourLostItems" element={<YourLostItems pageColor="primary" />}
           />
         </Routes>
       </Router>
