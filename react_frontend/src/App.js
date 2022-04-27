@@ -6,16 +6,15 @@ import AuthContext from "./contexts";
 import axios from 'axios';
 import {
   LoginPage,
-  Navigation,
+  ResponsiveAppBar,
   Footer,
-  ApplyLossPage,
-  TestPage,
   SignIn,
   SignUp,
   LostDeclaration,
   MainPage,
   LostReturn,
   PersonalPage,
+  ChatroomContainer,
 } from "./components";
 
 axios.defaults.xsrfCookieName = 'csrftoken'
@@ -38,6 +37,7 @@ export default function App() {
     <AuthContext.Provider value={{ user, setUser }}>
       <Router>
         {/* <Navigation /> */}
+        <ResponsiveAppBar />
         <Routes>
           {/* <Route path="/login" element={<LoginPage />} /> */}
           <Route path="/" element={<SignIn pageColor="primary" />} />
@@ -47,8 +47,7 @@ export default function App() {
           <Route path="/mainPage" element={<MainPage />} />
           <Route path="/lostReturn" element={<LostReturn pageColor="secondaryLight" />} />
           <Route path="/personalPage" element={<PersonalPage pageColor="primary" />} />
-          {/* <Route path="/applyloss " element={<ApplyLossPage />} />
-                    <Route path="/test " element={<TestPage />} /> */}
+          <Route path="/chatroom" element={<ChatroomContainer pageColor="primary" />} />
         </Routes>
         {/* <Footer /> */}
       </Router>

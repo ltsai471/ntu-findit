@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import themeColor from "../../config.js";
+import themeColor from "../config.js";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -19,16 +19,16 @@ import { convertLength } from "@mui/material/styles/cssUtils";
 const pages = ["聊天室", "刊登拾獲案件", "申報遺失物"];
 const settings = ["個人資料", "Account", "Dashboard", "Logout"];
 const pageRoutes = {
-  聊天室: "/mainpage",
+  聊天室: "/chatroom",
   刊登拾獲案件: "/lostPublish",
   申報遺失物: "/lostReport",
 };
 
-const ResponsiveAppBar = () => {
+function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
   const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
