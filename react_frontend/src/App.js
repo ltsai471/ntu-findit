@@ -36,6 +36,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <Router>
+        {/* <Navigation /> */}
         <ResponsiveAppBar />
         <Routes>
           {/* <Route path="/login" element={<LoginPage />} /> */}

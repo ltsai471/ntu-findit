@@ -3,34 +3,12 @@ from django.views import View
 from django.http import JsonResponse, Http404
 
 from rest_framework import viewsets, status, renderers
-from rest_framework.decorators import api_view, action
+from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .serializers import OrderSerializer, FilterItemSerializer, ItemSerializer
-from .models import Order, Item, ItemTypeLevel2, ItemTypeLevel1
+from .serializers import FilterItemSerializer, ItemSerializer
+from .models import Item, ItemTypeLevel2, ItemTypeLevel1
 from . import Utils
-
-
-
-@api_view(['GET'])
-def api_overview(request):
-    api_urls = {
-        'notice': '**This list is only for api preview, please check ntulost/urls.py to see the newest api urls.**',
-        'Items List and Create': '/item',
-        'Item Update and Delete': '/item/<int:id>',
-    }
-    return Response(api_urls)
-
-
-class OrderView(viewsets.ModelViewSet):
-    serializer_class = OrderSerializer
-
-    def get_queryset(self):
-        queryset = Order.objects.all()
-        para = self.request.query_params.get('query')
-        if para:
-            queryset = Order.objects.filter(customer__icontains=para)
-        return queryset
 
 
 class TestView(View):
@@ -86,7 +64,7 @@ class ItemViewSet(viewsets.ModelViewSet):
         if filterItemSerializer != None:
             return Response(filterItemSerializer.data, status=status.HTTP_201_CREATED)
         return Response(filterItemSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     # 遺失物自動配對
     @action(detail=False, methods=['get'], name="loss item pair")
     def lossItemPair(self, request):
@@ -100,7 +78,7 @@ class ItemViewSet(viewsets.ModelViewSet):
         if filterItemSerializer != None:
             return Response(filterItemSerializer.data, status=status.HTTP_201_CREATED)
         return Response(filterItemSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     # 你的拾獲案件
     @action(detail=False, methods=['get', 'post'], name="user found item")
     def userFoundItem(self, request):
@@ -111,7 +89,8 @@ class ItemViewSet(viewsets.ModelViewSet):
                 accountId=userId,
                 foundOrLoss="found"
             )
-            filterItemSerializer = FilterItemSerializer(userFoundItem, many=True)
+            filterItemSerializer = FilterItemSerializer(
+                userFoundItem, many=True)
             if filterItemSerializer != None:
                 return Response(filterItemSerializer.data, status=status.HTTP_201_CREATED)
             return Response(filterItemSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -133,7 +112,8 @@ class ItemViewSet(viewsets.ModelViewSet):
                 lossDatetime__range=lossDatetimeRange
             )
 
-            filterItemSerializer = FilterItemSerializer(filteredFoundItem, many=True)
+            filterItemSerializer = FilterItemSerializer(
+                filteredFoundItem, many=True)
             if filterItemSerializer != None:
                 return Response(filterItemSerializer.data, status=status.HTTP_201_CREATED)
             return Response(filterItemSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
