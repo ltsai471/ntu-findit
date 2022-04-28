@@ -5,9 +5,7 @@ import { verifyAccount } from "./webAPI";
 import AuthContext from "./contexts";
 import axios from "axios";
 import {
-  LoginPage,
   ResponsiveAppBar,
-  Footer,
   SignIn,
   SignUp,
   LostDeclaration,
@@ -37,7 +35,6 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <Router>
-        <ResponsiveAppBar />
         <Routes>
           <Route path="/" element={<SignIn pageColor="primary" />} />
           <Route path="/signUp" element={<SignUp pageColor="primary" />} />
@@ -74,7 +71,9 @@ export default function App() {
             path="/chatroom"
             element={<ChatroomContainer pageColor="primary" />}
           />
-          path="/yourLostItems" element={<YourLostItems pageColor="primary" />}
+          <Route
+            path="/yourLostItems"
+            element={<YourLostItems pageColor="primary" />}
           />
         </Routes>
       </Router>

@@ -47,7 +47,7 @@ const TitledListItem = ({ title, item }) => {
               mr: "30%",
               fontWeight: "bold",
               color: themeColor.primary,
-              borderColor: themeColor.primaryLight,
+              borderColor: themeColor.primary,
               textAlign: "center",
             }}
           >
