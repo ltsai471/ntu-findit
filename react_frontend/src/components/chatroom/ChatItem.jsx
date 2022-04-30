@@ -10,11 +10,8 @@ export default function ChatItem(props) {
 
     return (
         <ListItemButton
-            data-id={"test" + props.index}
-            // selected={selectedIndex === 2}
+            value={props.index}
             onClick={props.changeChatroom}
-        // onClick={(event) => handleListItemClick(event, 2)}
-        // onChange={event => handleListItemClick(event.target)}
         >
             <ListItemAvatar>
                 <Avatar alt={chat.target} src={chat.photo} />
