@@ -50,9 +50,9 @@ const MainPage = () => {
     <React.Fragment>
       <CssBaseline />
       <Box sx={{ width: "100%" }}>
-        <Item>
+        {/* <Item>
           <ResponsiveAppBar loggedIn={loggedIn} />
-        </Item>
+        </Item> */}
         <Item>
           <Grid container spacing={2}>
             <Grid item xs={12} md={3} lg={3}>
