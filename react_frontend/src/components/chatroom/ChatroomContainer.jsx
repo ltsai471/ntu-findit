@@ -47,20 +47,12 @@ export default function ChatroomContainer() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [newMessage, setNewMessage] = useState('');
 
-  const changeChatroom = (e) => {
-    // setCurrentIndex(e);
-    console.log(e);
-  };
-
-  // const changeChatroom = useCallback(
-  //   (e) => {
-  //     setCurrentIndex(e);
-  //     console.log(e);
-  //     // setCurrentIndex(e.target.getAttribute("data-id").value);
-      
-  //   },
-  //   [], // Tells React to memoize regardless of arguments.
-  // );
+  const changeChatroom = useCallback(
+    (e) => {
+      setCurrentIndex(e.currentTarget.getAttribute("value"));
+    },
+    [],
+  );
 
   const handleMessageChange = (e) => {
     setNewMessage(e.target.value);
@@ -81,10 +73,6 @@ export default function ChatroomContainer() {
     }
     setNewMessage('');
   };
-
-  //   handleMessagerChange(event) {
-  //     this.setState({ currentIndex: event });
-  //   }
 
   const divStyle = {
     height: '100vh',

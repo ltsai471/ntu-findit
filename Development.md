@@ -121,6 +121,7 @@ npm start
 npm run build
 </code></pre>
 
+
 ## Migrate model to your PostgreSQL
 
 <code><pre>
@@ -131,15 +132,10 @@ python manage.py migrate
 
 ## Convert *Uint8Array* to *JPEG* Image from JSON Request
 
-<code><pre>
-import cv2
-import numpy as np
-from PIL import Image
-data = request.json
-imageArray = data["image"]
-imgBGR = cv2.imdecode(np.array(imageArray, dtype=np.uint8),
-                       cv2.IMREAD_COLOR)
-imgRGB = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2RGB)
-imgRGB = Image.fromarray(imgRGB)
-imgRGB.save("save_path/new_image.jpeg")
-</code></pre>
+
+## Launch Chatroom
+docker run -p 6379:6379 -d redis:5
+(open container cli)
+redis-cli ping
+(output: PONG)
+http://localhost:8000/chat/chat/

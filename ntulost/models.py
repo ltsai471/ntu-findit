@@ -79,7 +79,7 @@ class ChatContext(models.Model):
     sendDatetime = models.DateTimeField(null=True)
 
     def __str__(self):
-        return f'{self.chatroom_id}_{self.seq}'
+        return f'{self.id}'
 
 
 class PreservePlace(models.Model):
