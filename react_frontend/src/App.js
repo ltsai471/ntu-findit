@@ -35,6 +35,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <Router>
+        <ResponsiveAppBar />
         <Routes>
           <Route path="/" element={<SignIn pageColor="primary" />} />
           <Route path="/signUp" element={<SignUp pageColor="primary" />} />
@@ -80,3 +81,4 @@ export default function App() {
     </AuthContext.Provider>
   );
 }
+
