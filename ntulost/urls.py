@@ -1,9 +1,9 @@
 from django.urls import path
-from . import views, api
+from . import api
 
 
 urlpatterns = [
-    path("", views.api_overview, name="api_overview"),
+    path("", api.api_overview, name="api_overview"),
     path('login/', api.login),
     path('signup/',api.signup),
     path('item/', api.item_list),

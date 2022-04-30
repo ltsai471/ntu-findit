@@ -26,12 +26,7 @@
 - `ntulost/view.py` display JSON api: http://localhost:8000/api/orders/
 
 ## Frontend Key File
-- `react_frontend/src/index.js` root page
-- Components structure
-    - first_page (OrderListContainer)
-        - OrderList
-            - OrderRow
-    - second_page (OrderDetail)
+- `react_frontend/src/App.js` root page
 
 
 ## Referance
