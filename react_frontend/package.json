@@ -3,7 +3,7 @@
   "homepage": "https://ltsai471.github.io",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8000",
+  "proxy": "http://140.112.106.237:16896",
   "dependencies": {
     "@date-io/date-fns": "^2.13.1",
     "@emotion/react": "^11.9.0",
