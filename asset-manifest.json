@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/ntu-findit/static/js/main.7caa7dbe.js",
-    "static/media/lostImg.jpg": "/ntu-findit/static/media/lostImg.c422f5d83ff4b1669e8e.jpg",
-    "index.html": "/ntu-findit/index.html",
-    "main.7caa7dbe.js.map": "/ntu-findit/static/js/main.7caa7dbe.js.map"
+    "main.js": "/static/js/main.5410c51d.js",
+    "static/media/lostImg.jpg": "/static/media/lostImg.c422f5d83ff4b1669e8e.jpg",
+    "index.html": "/index.html",
+    "main.5410c51d.js.map": "/static/js/main.5410c51d.js.map"
   },
   "entrypoints": [
-    "static/js/main.7caa7dbe.js"
+    "static/js/main.5410c51d.js"
   ]
 }
