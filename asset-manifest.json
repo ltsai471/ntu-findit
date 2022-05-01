@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/ntu-findit/static/js/main.7caa7dbe.js",
+    "static/media/lostImg.jpg": "/ntu-findit/static/media/lostImg.c422f5d83ff4b1669e8e.jpg",
+    "index.html": "/ntu-findit/index.html",
+    "main.7caa7dbe.js.map": "/ntu-findit/static/js/main.7caa7dbe.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.7caa7dbe.js"
+  ]
+}
