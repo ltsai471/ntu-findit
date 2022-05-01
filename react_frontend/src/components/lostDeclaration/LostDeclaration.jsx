@@ -103,7 +103,7 @@ class LostDeclaration extends React.Component {
         //     });
         // http://localhost:5000
         event.preventDefault();
-        return fetch('http://localhost:8000/ntulost/item/', {
+        return fetch('http://140.112.106.237:16896/ntulost/item/', {
             method: 'POST',
             headers: {
                 "content-type": "application/json"

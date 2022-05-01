@@ -31,7 +31,7 @@ const MainPage = () => {
   useEffect(() => {
     const getItemFilterData = async () => {
       const { data: itemList } = await axios.post(
-        "http://localhost:8000/ntulost/item/itemsFilter/",
+        "http://140.112.106.237:16896/ntulost/item/itemsFilter/",
         {
           itemPlace,
           itemTypeLevel1,

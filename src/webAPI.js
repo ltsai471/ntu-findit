@@ -1,6 +1,6 @@
 import { getAuthToken } from "./utils";
 
-const BASE_URL = 'http://localhost:8000'
+const BASE_URL = '140.112.106.237:16896'
 
 export const login = (username, password) => {
   const myHeaders = new Headers();
