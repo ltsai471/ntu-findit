@@ -1,0 +1,142 @@
+{
+    "header": {
+        "register":"註冊",
+        "signin":"登陸",
+        "home": "首頁"
+    },
+    "footer": {
+        "detail" : "版權所有 @ React"
+    },
+    "home": {
+        "hot_recommended": "爆款推薦",
+        "new_arrival": "新品上市",
+        "joint_venture": "合作企業"
+    },
+    "signin": {
+        "ntumail": "NTU 信箱",
+        "password": "密碼",
+        "rememberme": "記住密碼",
+        "login": "登入",
+        "forget": "忘記密碼?",
+        "signup": "還沒有帳號嗎? 快去註冊!",
+        "forgetpwd": "忘記密碼",
+        "EC":"English"
+    },
+    "chatlist": {
+        "All": "全部",
+        "Lost": "遺失",
+        "Found": "拾獲"
+    },
+    "LostDeclaration": {
+        "upload": "上傳圖片",
+        "time": "時間",
+        "location": "地點 *",
+        "item_catogary": "物品分類 *",
+        "credentials": "證件",
+        "book": "書本",
+        "3C": "電子產品",
+        "valuables": "私人貴重物品",
+        "stationery": "文具",
+        "Others": "其他",
+        "Object_description": "物品描述",
+        "submit": "送出",
+        "title1": "遺失物申報",
+        "title2": "拾獲案件刊登",
+        "obr": "物品影像辨識",
+        "student": "學生證影像辨識",
+        "sid": "學生證",
+        "nid": "身分證",
+        "hid": "健保卡",
+        "cell": "手機",
+        "NB": "筆電",
+        "key": "鑰匙",
+        "wallet": "錢包",
+        "shoes": "鞋子",
+        "hat": "帽子",
+        "clothes": "衣服",
+        "bp": "背包",
+        "wb": "水壺",
+        "um": "雨傘"
+    },
+    "BasicDateTimePicker": {
+        "time": "時間",
+        "start": "開始",
+        "end": "結束"
+    },
+    "googlemap": {
+        "contact": "聯繫案主"
+    },
+    "itemtypefilter" :{
+        "item_catogary": "物品分類",
+        "type": "類別",
+        "detail": "細項"
+    },
+    "placefilter":{
+        "location":"地點"
+    },
+    "preview":{
+        "Items_you_lost":"我的遺失物(預覽)",
+        "Items_you_found":"我的拾獲物（預覽）"
+    },
+    "marker":{
+        "you...":"請問你在這裡...",
+        "lost":"遺落物品？",
+        "found":"撿到東西？"
+    },
+    "viewtype":{
+        "diaplay": "顯示方式"
+    },
+    "resetpwd":{
+        "reset":"重設密碼",
+        "pwd": "密碼",
+        "confirm": "確認密碼",
+        "submit": "送出"
+    },
+    "personal": {
+        "modify": "個人資料修改",
+        "user_name": "暱稱",
+        "mail": "NTU 信箱",
+        "submit": "送出修改",
+        "photo": "大頭貼上傳",
+        "pwd": "修改密碼"
+    },
+    "searchtype":{
+        "view": "瀏覽案件",
+        "type": "類型"
+    },
+    "yourfound":{
+        "title":"我的拾獲案件"
+
+    },
+    "yourlost":{
+        "title":"我的遺失物",
+        "Finding": "尋找中",
+        "match": "自動配對案件",
+        "found": "已尋回"
+    },
+    "signup":{
+        "name": "姓名",
+        "mail": "NTU 信箱",
+        "pwd": "密碼",
+        "confirm": "確認密碼",
+        "signup": "註冊",
+        "login": "已經有帳號嗎? 快去登入!"
+    },
+    "location":{
+        "Zhoushan_Road": "舟山路",
+        "Building1_management": "管理學院一號館",
+        "Building2_management": "管理學院二號館",
+        "tandr_management": "管理學院教研館",
+        "library": "台大總圖",
+        "activity1": "第一學生活動中心(活大)",
+        "activity2": "第二學生活動中心(二活)",
+        "civil_eng": "國立臺灣大學土木工程學系系館",
+        "boya": "國立臺灣大學博雅教學館"
+    },
+    "add":{
+        "view": "查看自動配對案件",
+        "contact": "聯繫案主",
+        "remove": "移除",
+        "return": "歸還物品"
+    }
+}
